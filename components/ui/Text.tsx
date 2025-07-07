@@ -1,19 +1,31 @@
-import { CSSProperties, ReactNode } from 'react';
-import { SpacingProps, getSpacingStyles } from './spacing';
+import { CSSProperties, ReactNode, ElementType } from 'react';
+import { SpacingProps, getSpacingStyles, separateSpacingProps } from '@/lib/ui/spacing';
+import { PolymorphicComponentProps } from '@/lib/ui/polymorphic';
+import { 
+  TYPOGRAPHY_VARIANTS, 
+  TYPOGRAPHY_SIZES, 
+  TYPOGRAPHY_WEIGHTS,
+  TypographyVariant,
+  TypographySize,
+  TypographyWeight
+} from '@/lib/constants/typography.constants';
 
-interface TextProps extends SpacingProps {
+interface TextOwnProps extends SpacingProps {
   children: ReactNode;
-  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body' | 'caption' | 'code';
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
-  weight?: 'normal' | 'medium' | 'semibold' | 'bold';
+  variant?: TypographyVariant;
+  size?: TypographySize;
+  weight?: TypographyWeight;
   align?: 'left' | 'center' | 'right';
   color?: string;
   style?: CSSProperties;
   className?: string;
 }
 
-export default function Text({
+type TextProps<C extends ElementType = 'p'> = PolymorphicComponentProps<C, TextOwnProps>;
+
+export default function Text<C extends ElementType = 'p'>({
   children,
+  as,
   variant = 'body',
   size,
   weight,
@@ -21,41 +33,14 @@ export default function Text({
   color,
   style,
   className,
-  ...spacingProps
-}: TextProps) {
-  const variantStyles = {
-    h1: { fontSize: '48px', fontWeight: 500, fontFamily: 'var(--font-suisse-intl)' },
-    h2: { fontSize: '36px', fontWeight: 500, fontFamily: 'var(--font-suisse-intl)' },
-    h3: { fontSize: '24px', fontWeight: 500, fontFamily: 'var(--font-suisse-intl)' },
-    h4: { fontSize: '20px', fontWeight: 500, fontFamily: 'var(--font-suisse-intl)' },
-    h5: { fontSize: '18px', fontWeight: 500, fontFamily: 'var(--font-suisse-intl)' },
-    h6: { fontSize: '16px', fontWeight: 500, fontFamily: 'var(--font-suisse-intl)' },
-    body: { fontSize: '16px', fontWeight: 400, lineHeight: '1.5' },
-    caption: { fontSize: '14px', fontWeight: 400, lineHeight: '1.4' },
-    code: { fontFamily: 'var(--font-geist-mono)', fontSize: '14px', fontWeight: 400 }
-  };
-
-  const sizeStyles = {
-    xs: { fontSize: '12px' },
-    sm: { fontSize: '14px' },
-    md: { fontSize: '16px' },
-    lg: { fontSize: '18px' },
-    xl: { fontSize: '20px' },
-    '2xl': { fontSize: '24px' },
-    '3xl': { fontSize: '30px' }
-  };
-
-  const weightStyles = {
-    normal: { fontWeight: 400 },
-    medium: { fontWeight: 500 },
-    semibold: { fontWeight: 600 },
-    bold: { fontWeight: 700 }
-  };
+  ...rest
+}: TextProps<C>) {
+  const [spacingProps, otherProps] = separateSpacingProps(rest);
 
   const textStyle: CSSProperties = {
-    ...variantStyles[variant],
-    ...(size && sizeStyles[size]),
-    ...(weight && weightStyles[weight]),
+    ...TYPOGRAPHY_VARIANTS[variant],
+    ...(size && TYPOGRAPHY_SIZES[size]),
+    ...(weight && TYPOGRAPHY_WEIGHTS[weight]),
     textAlign: align,
     color: color || 'var(--foreground)',
     margin: 0,
@@ -63,10 +48,11 @@ export default function Text({
     ...style
   };
 
-  const Component = variant.startsWith('h') ? variant : 'p';
+  // Use the 'as' prop if provided, otherwise use variant-based element or default 'p'
+  const Component = as || (variant.startsWith('h') ? variant : 'p');
 
   return (
-    <Component style={textStyle} className={className}>
+    <Component style={textStyle} className={className} {...otherProps}>
       {children}
     </Component>
   );

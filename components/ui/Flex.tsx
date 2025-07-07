@@ -1,9 +1,20 @@
-import { CSSProperties, ReactNode } from 'react';
-import { SpacingProps, getSpacingStyles } from './spacing';
+import { CSSProperties, ReactNode, ElementType } from 'react';
+import {
+  SpacingProps,
+  getSpacingStyles,
+  separateSpacingProps,
+} from '@/lib/ui/spacing';
+import { PolymorphicComponentProps } from '@/lib/ui/polymorphic';
 
-interface FlexProps extends SpacingProps {
+interface FlexOwnProps extends SpacingProps {
   children: ReactNode;
-  justify?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly';
+  justify?:
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'space-between'
+    | 'space-around'
+    | 'space-evenly';
   align?: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline';
   direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
   gap?: number | string;
@@ -12,8 +23,14 @@ interface FlexProps extends SpacingProps {
   className?: string;
 }
 
-export default function Flex({
+type FlexProps<C extends ElementType = 'div'> = PolymorphicComponentProps<
+  C,
+  FlexOwnProps
+>;
+
+export default function Flex<C extends ElementType = 'div'>({
   children,
+  as,
   justify = 'flex-start',
   align = 'stretch',
   direction = 'row',
@@ -21,8 +38,11 @@ export default function Flex({
   wrap = 'nowrap',
   style,
   className,
-  ...spacingProps
-}: FlexProps) {
+  ...rest
+}: FlexProps<C>) {
+  const Component = as || 'div';
+  const [spacingProps, otherProps] = separateSpacingProps(rest);
+
   const flexStyle: CSSProperties = {
     display: 'flex',
     justifyContent: justify,
@@ -31,12 +51,12 @@ export default function Flex({
     gap: typeof gap === 'number' ? `${gap}px` : gap,
     flexWrap: wrap,
     ...getSpacingStyles(spacingProps),
-    ...style
+    ...style,
   };
 
   return (
-    <div style={flexStyle} className={className}>
+    <Component style={flexStyle} className={className} {...otherProps}>
       {children}
-    </div>
+    </Component>
   );
 }

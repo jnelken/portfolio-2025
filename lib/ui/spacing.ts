@@ -122,3 +122,44 @@ export function getSpacingStyles(props: SpacingProps): CSSProperties {
 
   return styles;
 }
+
+export function separateSpacingProps<T extends Record<string, any>>(
+  props: T
+): [SpacingProps, Omit<T, keyof SpacingProps>] {
+  const {
+    margin,
+    marginX,
+    marginY,
+    marginTop,
+    marginRight,
+    marginBottom,
+    marginLeft,
+    padding,
+    paddingX,
+    paddingY,
+    paddingTop,
+    paddingRight,
+    paddingBottom,
+    paddingLeft,
+    ...rest
+  } = props;
+
+  const spacingProps: SpacingProps = {
+    margin,
+    marginX,
+    marginY,
+    marginTop,
+    marginRight,
+    marginBottom,
+    marginLeft,
+    padding,
+    paddingX,
+    paddingY,
+    paddingTop,
+    paddingRight,
+    paddingBottom,
+    paddingLeft,
+  };
+
+  return [spacingProps, rest as Omit<T, keyof SpacingProps>];
+}

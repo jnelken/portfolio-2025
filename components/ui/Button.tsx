@@ -1,10 +1,27 @@
-import { CSSProperties, ReactNode, MouseEventHandler } from 'react';
-import { SpacingProps, getSpacingStyles } from './spacing';
+import {
+  CSSProperties,
+  ReactNode,
+  MouseEventHandler,
+  ElementType,
+} from 'react';
+import {
+  SpacingProps,
+  getSpacingStyles,
+  separateSpacingProps,
+} from '@/lib/ui/spacing';
+import { PolymorphicComponentProps } from '@/lib/ui/polymorphic';
+import {
+  BUTTON_VARIANTS,
+  BUTTON_SIZES,
+  BUTTON_BASE_STYLE,
+  ButtonVariant,
+  ButtonSize,
+} from '@/lib/constants/form.constants';
 
-interface ButtonProps extends SpacingProps {
+interface ButtonOwnProps extends SpacingProps {
   children: ReactNode;
-  variant?: 'primary' | 'secondary' | 'outline';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: ButtonVariant;
+  size?: ButtonSize;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   href?: string;
   target?: string;
@@ -13,8 +30,14 @@ interface ButtonProps extends SpacingProps {
   className?: string;
 }
 
-export default function Button({
+type ButtonProps<C extends ElementType = 'button'> = PolymorphicComponentProps<
+  C,
+  ButtonOwnProps
+>;
+
+export default function Button<C extends ElementType = 'button'>({
   children,
+  as,
   variant = 'primary',
   size = 'md',
   onClick,
@@ -23,64 +46,37 @@ export default function Button({
   rel,
   style,
   className,
-  ...spacingProps
-}: ButtonProps) {
-  const baseStyle: CSSProperties = {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: '9999px',
-    border: 'none',
-    cursor: 'pointer',
-    fontWeight: 500,
-    textDecoration: 'none',
-    transition: 'all 0.2s ease',
-    gap: '8px'
-  };
-
-  const sizeStyles = {
-    sm: { fontSize: '14px', height: '40px', padding: '0 16px' },
-    md: { fontSize: '16px', height: '48px', padding: '0 20px' },
-    lg: { fontSize: '18px', height: '56px', padding: '0 24px' }
-  };
-
-  const variantStyles = {
-    primary: {
-      backgroundColor: 'var(--foreground)',
-      color: 'var(--background)',
-      border: '1px solid transparent'
-    },
-    secondary: {
-      backgroundColor: 'var(--background)',
-      color: 'var(--foreground)',
-      border: '1px solid rgba(0, 0, 0, 0.1)'
-    },
-    outline: {
-      backgroundColor: 'transparent',
-      color: 'var(--foreground)',
-      border: '1px solid rgba(0, 0, 0, 0.1)'
-    }
-  };
+  ...rest
+}: ButtonProps<C>) {
+  const [spacingProps, otherProps] = separateSpacingProps(rest);
 
   const buttonStyle: CSSProperties = {
-    ...baseStyle,
-    ...sizeStyles[size],
-    ...variantStyles[variant],
+    ...BUTTON_BASE_STYLE,
+    ...BUTTON_SIZES[size],
+    ...BUTTON_VARIANTS[variant],
     ...getSpacingStyles(spacingProps),
-    ...style
+    ...style,
   };
 
-  if (href) {
-    return (
-      <a href={href} target={target} rel={rel} style={buttonStyle} className={className}>
-        {children}
-      </a>
-    );
+  // Determine component based on props
+  let Component: ElementType;
+  if (as) {
+    Component = as;
+  } else if (href) {
+    Component = 'a';
+  } else {
+    Component = 'button';
   }
 
+  const componentProps = {
+    ...(href && { href, target, rel }),
+    ...(onClick && Component === 'button' && { onClick }),
+    ...otherProps,
+  };
+
   return (
-    <button onClick={onClick} style={buttonStyle} className={className}>
+    <Component style={buttonStyle} className={className} {...componentProps}>
       {children}
-    </button>
+    </Component>
   );
 }
