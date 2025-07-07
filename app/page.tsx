@@ -12,16 +12,24 @@ export default function Home() {
           height={38}
           priority
         />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
+        <p className="text-center sm:text-left">
+          Hey, I'm Jake. I write excellent fullstack code and have been building
+          satisfying user experiences for over{' '}
+          <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
+            10
+          </code>{' '}
+          years.
+        </p>
+        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left">
           <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{' '}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
+            I'm currently working at{' '}
+            <a
+              href="https://www.datadoghq.com"
+              target="_blank"
+              rel="noopener noreferrer">
+              Datadog
+            </a>{' '}
+            as a Senior Software Engineer.
           </li>
         </ol>
 
