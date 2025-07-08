@@ -9,6 +9,7 @@ The foundation component that provides polymorphic rendering and spacing props t
 ## Overview
 
 UIBase is the core component that handles:
+
 - **Polymorphic rendering** - Can render as any HTML element via the `as` prop
 - **Spacing system** - Consistent margin and padding props
 - **Type safety** - Full TypeScript support for all element attributes
@@ -16,6 +17,7 @@ UIBase is the core component that handles:
 ## Features
 
 ### Polymorphic Rendering
+
 ```tsx
 <UIBase as="div">Default div</UIBase>
 <UIBase as="section">Renders as section</UIBase>
@@ -23,6 +25,7 @@ UIBase is the core component that handles:
 ```
 
 ### Spacing Props
+
 ```tsx
 <UIBase margin="md" padding="lg">
 <UIBase marginX="sm" paddingY="xl">
@@ -30,6 +33,7 @@ UIBase is the core component that handles:
 ```
 
 ### Spacing Scale
+
 - `none` = 0px
 - `auto` = auto
 - `xxs` = 2px
@@ -42,26 +46,26 @@ UIBase is the core component that handles:
 
 ## Props
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `as` | `ElementType` | HTML element to render |
-| `children` | `ReactNode` | Content to render |
-| `margin` | `SpacingSize` | All margins |
-| `marginX` | `SpacingSize` | Horizontal margins |
-| `marginY` | `SpacingSize` | Vertical margins |
-| `marginTop` | `SpacingSize` | Top margin |
-| `marginRight` | `SpacingSize` | Right margin |
-| `marginBottom` | `SpacingSize` | Bottom margin |
-| `marginLeft` | `SpacingSize` | Left margin |
-| `padding` | `SpacingSize` | All padding |
-| `paddingX` | `SpacingSize` | Horizontal padding |
-| `paddingY` | `SpacingSize` | Vertical padding |
-| `paddingTop` | `SpacingSize` | Top padding |
-| `paddingRight` | `SpacingSize` | Right padding |
-| `paddingBottom` | `SpacingSize` | Bottom padding |
-| `paddingLeft` | `SpacingSize` | Left padding |
-| `style` | `CSSProperties` | Custom styles |
-| `className` | `string` | CSS classes |
+| Prop            | Type            | Description            |
+| --------------- | --------------- | ---------------------- |
+| `as`            | `ElementType`   | HTML element to render |
+| `children`      | `ReactNode`     | Content to render      |
+| `margin`        | `SpacingSize`   | All margins            |
+| `marginX`       | `SpacingSize`   | Horizontal margins     |
+| `marginY`       | `SpacingSize`   | Vertical margins       |
+| `marginTop`     | `SpacingSize`   | Top margin             |
+| `marginRight`   | `SpacingSize`   | Right margin           |
+| `marginBottom`  | `SpacingSize`   | Bottom margin          |
+| `marginLeft`    | `SpacingSize`   | Left margin            |
+| `padding`       | `SpacingSize`   | All padding            |
+| `paddingX`      | `SpacingSize`   | Horizontal padding     |
+| `paddingY`      | `SpacingSize`   | Vertical padding       |
+| `paddingTop`    | `SpacingSize`   | Top padding            |
+| `paddingRight`  | `SpacingSize`   | Right padding          |
+| `paddingBottom` | `SpacingSize`   | Bottom padding         |
+| `paddingLeft`   | `SpacingSize`   | Left padding           |
+| `style`         | `CSSProperties` | Custom styles          |
+| `className`     | `string`        | CSS classes            |
 
 ## Usage in Other Components
 

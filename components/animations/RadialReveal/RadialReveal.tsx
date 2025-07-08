@@ -20,18 +20,15 @@ export default function RadialReveal({
 }: RadialRevealProps) {
   const [internalIsRevealed, setInternalIsRevealed] = useState(false);
   const [isAutoFading, setIsAutoFading] = useState(false);
+  const [shouldShowRipples, setShouldShowRipples] = useState(false);
   const [triggerPosition, setTriggerPosition] = useState({ x: 50, y: 50 });
   const fadeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const animationId = useMemo(
-    () => `radial-reveal-${Math.floor(Math.random() * 10000)}`,
-    [],
-  );
+  const animationId = useMemo(() => `radial-reveal-${Math.floor(Math.random() * 10000)}`, []);
 
   // Use external control if provided, otherwise use internal state
-  const isRevealed =
-    trigger === 'manual' ? externalIsRevealed ?? false : internalIsRevealed;
+  const isRevealed = trigger === 'manual' ? (externalIsRevealed ?? false) : internalIsRevealed;
 
   // Check for reduced motion preference
   const prefersReducedMotion =
@@ -46,14 +43,8 @@ export default function RadialReveal({
     const triggerRect = triggerRef.current.getBoundingClientRect();
     const containerRect = containerRef.current.getBoundingClientRect();
 
-    const x =
-      ((triggerRect.left + triggerRect.width / 2 - containerRect.left) /
-        containerRect.width) *
-      100;
-    const y =
-      ((triggerRect.top + triggerRect.height / 2 - containerRect.top) /
-        containerRect.height) *
-      100;
+    const x = ((triggerRect.left + triggerRect.width / 2 - containerRect.left) / containerRect.width) * 100;
+    const y = ((triggerRect.top + triggerRect.height / 2 - containerRect.top) / containerRect.height) * 100;
 
     setTriggerPosition({
       x: Math.max(0, Math.min(100, x)),
@@ -72,6 +63,7 @@ export default function RadialReveal({
 
       setInternalIsRevealed(true);
       setIsAutoFading(false);
+      setShouldShowRipples(true);
 
       onRevealStart?.();
 
@@ -80,6 +72,7 @@ export default function RadialReveal({
       fadeTimeoutRef.current = setTimeout(() => {
         setIsAutoFading(true);
         setInternalIsRevealed(false);
+        setShouldShowRipples(false);
       }, totalHoldTime);
     }
   };
@@ -132,9 +125,12 @@ export default function RadialReveal({
   // Animation completion handler
   useEffect(() => {
     if (isRevealed) {
-      const timer = setTimeout(() => {
-        onRevealComplete?.();
-      }, duration + (rippleCount - 1) * stagger);
+      const timer = setTimeout(
+        () => {
+          onRevealComplete?.();
+        },
+        duration + (rippleCount - 1) * stagger,
+      );
 
       return () => clearTimeout(timer);
     }
@@ -215,26 +211,22 @@ export default function RadialReveal({
     animation: prefersReducedMotion
       ? undefined
       : isRevealed
-      ? `${animationId}-${
-          direction === 'out' ? 'hide' : 'reveal'
-        } ${duration}ms ${easing} forwards`
-      : isAutoFading
-      ? `${animationId}-auto-fade ${duration * 10}ms ${easing} forwards`
-      : !isRevealed && !isAutoFading
-      ? undefined // Stay at current state
-      : direction === 'both'
-      ? `${animationId}-hide ${duration}ms ${easing} forwards`
-      : undefined,
+        ? `${animationId}-${direction === 'out' ? 'hide' : 'reveal'} ${duration}ms ${easing} forwards`
+        : isAutoFading
+          ? `${animationId}-auto-fade ${duration * 10}ms ${easing} forwards`
+          : !isRevealed && !isAutoFading
+            ? undefined // Stay at current state
+            : direction === 'both'
+              ? `${animationId}-hide ${duration}ms ${easing} forwards`
+              : undefined,
     opacity: prefersReducedMotion
       ? isRevealed
         ? 1
         : isAutoFading
-        ? 1 // Will animate to 0 via transition
-        : 0 // Rest state
+          ? 1 // Will animate to 0 via transition
+          : 0 // Rest state
       : undefined, // Let CSS animations handle it
-    transition: prefersReducedMotion
-      ? `opacity ${duration}ms ${easing}`
-      : undefined,
+    transition: prefersReducedMotion ? `opacity ${duration}ms ${easing}` : undefined,
   };
 
   // Generate ripple elements
@@ -255,10 +247,8 @@ export default function RadialReveal({
         pointerEvents: 'none',
         transformOrigin: 'center',
         animation:
-          isRevealed && !prefersReducedMotion
-            ? `${animationId}-ripple ${duration * 1.5}ms ${easing} ${
-                i * stagger
-              }ms forwards`
+          shouldShowRipples && !prefersReducedMotion
+            ? `${animationId}-ripple ${duration * 1.5}ms ${easing} ${i * stagger}ms forwards`
             : undefined,
         zIndex: 2,
       }}

@@ -17,9 +17,9 @@ import ContentStack from '../layout/ContentStack';
 export default function Home() {
   return (
     <>
-      <NoiseBackground />
       <WarpContainer>
         <PageLayout>
+          <NoiseBackground />
           <MainContent>
             <ContentStack spacing="md" style={{ textAlign: 'center' }}>
               <RadialReveal
@@ -28,10 +28,10 @@ export default function Home() {
                 radius={300}
                 easing="ease-out"
                 rippleCount={10}
-                stagger={150}>
+                stagger={150}
+              >
                 <Text>
-                  Hey, I'm Jake. I have been building user experiences for over{' '}
-                  <Code>10</Code> years.
+                  Hey, I'm Jake. I have been building user experiences for over <Code>10</Code> years.
                 </Text>
 
                 <ol
@@ -40,26 +40,26 @@ export default function Home() {
                     fontSize: '14px',
                     lineHeight: '1.5',
                     maxWidth: '400px',
-                  }}>
+                  }}
+                >
                   <li
                     style={{
                       marginBottom: '8px',
                       letterSpacing: '-0.01em',
-                    }}>
+                    }}
+                  >
                     I'm currently working at{' '}
                     <a
                       href="https://www.datadoghq.com"
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ color: 'var(--foreground)' }}>
+                      style={{ color: 'var(--foreground)' }}
+                    >
                       Datadog
                     </a>{' '}
                     as a Senior Software Engineer.
                   </li>
-                  <li>
-                    I enjoy building visuals that are both functional and
-                    beautiful.
-                  </li>
+                  <li>I enjoy building visuals that are both functional and beautiful.</li>
                 </ol>
 
                 <Flex gap={16} align="center" direction="column">

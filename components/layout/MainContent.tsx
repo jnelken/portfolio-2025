@@ -8,12 +8,7 @@ interface MainContentProps extends SpacingProps {
   className?: string;
 }
 
-export default function MainContent({
-  children,
-  style,
-  className,
-  ...spacingProps
-}: MainContentProps) {
+export default function MainContent({ children, style, className, ...spacingProps }: MainContentProps) {
   const mainStyle: CSSProperties = {
     display: 'flex',
     flexDirection: 'column',

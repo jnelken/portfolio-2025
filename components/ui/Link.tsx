@@ -1,8 +1,4 @@
-import {
-  CSSProperties,
-  ReactNode,
-  ElementType,
-} from 'react';
+import { CSSProperties, ReactNode, ElementType } from 'react';
 import { SpacingProps } from '@/lib/ui/spacing';
 import { PolymorphicComponentProps } from '@/lib/ui/polymorphic';
 import {
@@ -26,10 +22,7 @@ interface LinkOwnProps extends SpacingProps {
   className?: string;
 }
 
-type LinkProps<C extends ElementType = 'a'> = PolymorphicComponentProps<
-  C,
-  LinkOwnProps
->;
+type LinkProps<C extends ElementType = 'a'> = PolymorphicComponentProps<C, LinkOwnProps>;
 
 export default function Link<C extends ElementType = 'a'>({
   children,
@@ -56,14 +49,7 @@ export default function Link<C extends ElementType = 'a'>({
   const linkRel = rel || (isExternal ? 'noopener noreferrer' : undefined);
 
   return (
-    <UIBase 
-      as={as} 
-      style={linkStyle} 
-      href={href}
-      target={linkTarget}
-      rel={linkRel}
-      {...rest}
-    >
+    <UIBase as={as} style={linkStyle} href={href} target={linkTarget} rel={linkRel} {...rest}>
       {children}
     </UIBase>
   );

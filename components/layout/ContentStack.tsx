@@ -27,11 +27,7 @@ export default function ContentStack({
   };
 
   return (
-    <UIBase 
-      style={stackStyle} 
-      className={className}
-      {...spacingProps}
-    >
+    <UIBase style={stackStyle} className={className} {...spacingProps}>
       {children}
     </UIBase>
   );

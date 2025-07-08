@@ -54,6 +54,7 @@ Logo is a custom SVG component that displays the brand identity for Jake Nelken'
 ## Design Elements
 
 The logo consists of:
+
 - **Background rectangle** - Rounded corners with subtle fill
 - **Text element** - "Jake Nelken" in SuisseIntl Medium
 - **Accent circle** - Decorative element with dual circle design
@@ -62,6 +63,7 @@ The logo consists of:
 ## Size Guidelines
 
 ### Recommended Sizes
+
 - **Small/Mobile**: 120×25px - For mobile navigation
 - **Medium/Tablet**: 160×34px - For tablet layouts
 - **Default/Desktop**: 180×38px - Standard desktop size
@@ -69,11 +71,13 @@ The logo consists of:
 - **Extra Large**: 360×76px - For prominent displays
 
 ### Aspect Ratio
+
 The logo maintains a consistent aspect ratio of approximately 4.7:1 (width:height).
 
 ## Usage Guidelines
 
 ### ✅ Use Logo for:
+
 - Navigation headers
 - Page headers and footers
 - Brand identity sections
@@ -81,6 +85,7 @@ The logo maintains a consistent aspect ratio of approximately 4.7:1 (width:heigh
 - Business cards and print materials
 
 ### ❌ Don't use Logo for:
+
 - Interactive elements (not clickable by default)
 - Decorative purposes unrelated to branding
 - As a background element
@@ -88,6 +93,7 @@ The logo maintains a consistent aspect ratio of approximately 4.7:1 (width:heigh
 ## Color Recommendations
 
 The logo works well with these color schemes:
+
 - **Default**: Inherits current text color
 - **Primary brand**: #007acc or similar blue
 - **Dark themes**: White (#ffffff)
@@ -113,17 +119,17 @@ The logo works well with these color schemes:
 </nav>
 
 // In header with custom styling
-<Logo 
-  width={200} 
+<Logo
+  width={200}
   height={42}
-  style={{ 
+  style={{
     filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))',
     marginBottom: '20px'
   }}
 />
 
 // Responsive logo
-<Logo 
+<Logo
   width={window.innerWidth < 768 ? 120 : 180}
   height={window.innerWidth < 768 ? 25 : 38}
 />

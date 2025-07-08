@@ -1,15 +1,6 @@
 import { CSSProperties } from 'react';
 
-export type SpacingSize =
-  | 'none'
-  | 'auto'
-  | 'xxs'
-  | 'xs'
-  | 'sm'
-  | 'md'
-  | 'lg'
-  | 'xl'
-  | 'xxl';
+export type SpacingSize = 'none' | 'auto' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 
 export const spacingToPx: Record<SpacingSize, string> = {
   none: '0',
@@ -124,7 +115,7 @@ export function getSpacingStyles(props: SpacingProps): CSSProperties {
 }
 
 export function separateSpacingProps<T extends Record<string, any>>(
-  props: T
+  props: T,
 ): [SpacingProps, Omit<T, keyof SpacingProps>] {
   const {
     margin,

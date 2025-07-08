@@ -9,8 +9,7 @@ const meta: Meta<typeof RadialReveal> = {
     layout: 'centered',
     docs: {
       description: {
-        component:
-          'A reusable component that reveals content with a radial animation from a trigger element.',
+        component: 'A reusable component that reveals content with a radial animation from a trigger element.',
       },
     },
   },
@@ -57,7 +56,8 @@ function TriggerButton({ children }: { children: React.ReactNode }) {
         borderRadius: '8px',
         fontSize: '16px',
         fontWeight: '500',
-      }}>
+      }}
+    >
       {children}
     </button>
   );
@@ -68,8 +68,7 @@ const DemoContent = () => (
   <div style={{ padding: '40px', textAlign: 'center', maxWidth: '300px' }}>
     <h3 style={{ margin: '0 0 16px 0', color: '#333' }}>Hidden Content</h3>
     <p style={{ margin: '0 0 16px 0', color: '#666', lineHeight: '1.5' }}>
-      This content appears with a radial reveal animation from the trigger
-      element.
+      This content appears with a radial reveal animation from the trigger element.
     </p>
     <button
       style={{
@@ -78,7 +77,8 @@ const DemoContent = () => (
         color: 'white',
         border: 'none',
         borderRadius: '4px',
-      }}>
+      }}
+    >
       Action Button
     </button>
   </div>
@@ -107,7 +107,8 @@ export const HoverTrigger: Story = {
         height: '300px',
         border: '1px dashed #ccc',
         position: 'relative',
-      }}>
+      }}
+    >
       <RadialReveal {...args}>
         <DemoContent />
       </RadialReveal>
@@ -133,7 +134,8 @@ export const ClickTrigger: Story = {
         height: '300px',
         border: '1px dashed #ccc',
         position: 'relative',
-      }}>
+      }}
+    >
       <RadialReveal {...args}>
         <DemoContent />
       </RadialReveal>
@@ -159,7 +161,8 @@ export const WithRipples: Story = {
         height: '400px',
         border: '1px dashed #ccc',
         position: 'relative',
-      }}>
+      }}
+    >
       <RadialReveal {...args}>
         <DemoContent />
       </RadialReveal>
@@ -182,7 +185,8 @@ function LogoTrigger() {
         color: 'white',
         fontWeight: 'bold',
         fontSize: '24px',
-      }}>
+      }}
+    >
       JN
     </div>
   );
@@ -207,20 +211,19 @@ export const LogoExample: Story = {
         border: '1px dashed #ccc',
         position: 'relative',
         backgroundColor: '#f8f9fa',
-      }}>
+      }}
+    >
       <RadialReveal {...args}>
         <div
           style={{
             padding: '60px 40px',
             textAlign: 'center',
             color: '#333',
-          }}>
+          }}
+        >
           <h2 style={{ margin: '0 0 20px 0' }}>Jake Nelken</h2>
-          <p style={{ margin: '0 0 20px 0', opacity: 0.8 }}>
-            Frontend Engineer & Creative Developer
-          </p>
-          <div
-            style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
+          <p style={{ margin: '0 0 20px 0', opacity: 0.8 }}>Frontend Engineer & Creative Developer</p>
+          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
             <button
               style={{
                 padding: '8px 16px',
@@ -228,7 +231,8 @@ export const LogoExample: Story = {
                 color: 'white',
                 border: 'none',
                 borderRadius: '4px',
-              }}>
+              }}
+            >
               Contact
             </button>
             <button
@@ -238,7 +242,8 @@ export const LogoExample: Story = {
                 color: '#007acc',
                 border: '1px solid #007acc',
                 borderRadius: '4px',
-              }}>
+              }}
+            >
               Portfolio
             </button>
           </div>
@@ -272,7 +277,8 @@ export const FastAnimation: Story = {
         height: '300px',
         border: '1px dashed #ccc',
         position: 'relative',
-      }}>
+      }}
+    >
       <RadialReveal {...args}>
         <DemoContent />
       </RadialReveal>
@@ -297,7 +303,8 @@ export const SlowAnimation: Story = {
         height: '300px',
         border: '1px dashed #ccc',
         position: 'relative',
-      }}>
+      }}
+    >
       <RadialReveal {...args}>
         <DemoContent />
       </RadialReveal>

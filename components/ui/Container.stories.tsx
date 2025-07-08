@@ -13,7 +13,7 @@ const meta: Meta<typeof Container> = {
     },
   },
   decorators: [
-    (Story) => (
+    Story => (
       <div style={{ width: '100vw', backgroundColor: '#f5f5f5', minHeight: '200px' }}>
         <Story />
       </div>
@@ -29,8 +29,8 @@ const DemoContent = () => (
   <div style={{ backgroundColor: '#e3f2fd', padding: '20px', borderRadius: '8px', border: '1px solid #2196f3' }}>
     <h3 style={{ margin: '0 0 10px 0', color: '#1976d2' }}>Container Content</h3>
     <p style={{ margin: 0, color: '#424242' }}>
-      This content is centered and constrained by the container's max width. 
-      Resize the viewport to see how the container responds to different screen sizes.
+      This content is centered and constrained by the container's max width. Resize the viewport to see how the
+      container responds to different screen sizes.
     </p>
   </div>
 );
@@ -171,15 +171,22 @@ export const PolymorphicMain: Story = {
 export const ArticleContainer: Story = {
   render: () => (
     <Container as="article" maxWidth="700px" padding="lg">
-      <div style={{ backgroundColor: 'white', padding: '30px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+      <div
+        style={{
+          backgroundColor: 'white',
+          padding: '30px',
+          borderRadius: '8px',
+          boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+        }}
+      >
         <h1 style={{ margin: '0 0 20px 0', fontSize: '32px', color: '#333' }}>Article Title</h1>
         <p style={{ margin: '0 0 15px 0', lineHeight: '1.6', color: '#555' }}>
-          This is an example of using Container as an article element. The container provides 
-          optimal reading width and spacing for content.
+          This is an example of using Container as an article element. The container provides optimal reading width and
+          spacing for content.
         </p>
         <p style={{ margin: 0, lineHeight: '1.6', color: '#555' }}>
-          The max-width ensures lines don't become too long to read comfortably, 
-          while the padding provides breathing room around the content.
+          The max-width ensures lines don't become too long to read comfortably, while the padding provides breathing
+          room around the content.
         </p>
       </div>
     </Container>

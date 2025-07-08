@@ -29,17 +29,9 @@ function generateWarpParams(seed: number, intensity: number = 1) {
   };
 }
 
-export default function WarpContainer({
-  children,
-  style,
-  className,
-  intensity = 0.6,
-}: WarpContainerProps) {
+export default function WarpContainer({ children, style, className, intensity = 0.6 }: WarpContainerProps) {
   const seed = useMemo(() => Math.floor(Math.random() * 10000), []); // Generate once per component mount
-  const params = useMemo(
-    () => generateWarpParams(seed, intensity),
-    [seed, intensity],
-  );
+  const params = useMemo(() => generateWarpParams(seed, intensity), [seed, intensity]);
 
   const animationName = `warp-${seed}`;
 
@@ -60,7 +52,9 @@ export default function WarpContainer({
           filter: blur(${params.blurMax * 0.2}px) contrast(0.95) hue-rotate(${-params.hueRange * 0.15}deg);
         }
         75% {
-          transform: scale(${1 + (params.scaleMax - 1) * 0.5}) skew(${params.skewMax * 0.2}deg, ${-params.skewMax * 0.3}deg);
+          transform: scale(${1 + (params.scaleMax - 1) * 0.5}) skew(${
+            params.skewMax * 0.2
+          }deg, ${-params.skewMax * 0.3}deg);
           filter: blur(${params.blurMax * 0.3}px) contrast(1.05) hue-rotate(${params.hueRange * 0.1}deg);
         }
       }

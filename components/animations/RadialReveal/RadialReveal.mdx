@@ -49,6 +49,7 @@ RadialReveal creates a circular reveal animation that grows outward from the tri
 ## Installation
 
 ### NPM Installation (Future)
+
 ```bash
 npm install @jakenelken/animations
 ```
@@ -58,7 +59,9 @@ import { RadialReveal } from '@jakenelken/animations';
 ```
 
 ### Copy-Paste Installation
+
 Copy the component files from this repository:
+
 - `RadialReveal.tsx`
 - `types.ts`
 - `index.ts`
@@ -66,8 +69,9 @@ Copy the component files from this repository:
 ## Usage Examples
 
 ### Basic Hover Reveal
+
 ```jsx
-<RadialReveal 
+<RadialReveal
   triggerElement={<button>Hover me</button>}
   trigger="hover"
 >
@@ -76,8 +80,9 @@ Copy the component files from this repository:
 ```
 
 ### Click Toggle with Ripples
+
 ```jsx
-<RadialReveal 
+<RadialReveal
   triggerElement={<Logo />}
   trigger="click"
   radius={300}
@@ -90,10 +95,11 @@ Copy the component files from this repository:
 ```
 
 ### Manual Control
+
 ```jsx
 const [isOpen, setIsOpen] = useState(false);
 
-<RadialReveal 
+<RadialReveal
   triggerElement={<MenuButton onClick={() => setIsOpen(!isOpen)} />}
   trigger="manual"
   isRevealed={isOpen}
@@ -104,8 +110,9 @@ const [isOpen, setIsOpen] = useState(false);
 ```
 
 ### Custom Styling
+
 ```jsx
-<RadialReveal 
+<RadialReveal
   triggerElement={<CustomTrigger />}
   trigger="hover"
   className="my-reveal"
@@ -118,16 +125,19 @@ const [isOpen, setIsOpen] = useState(false);
 ## Animation Properties
 
 ### Trigger Modes
+
 - `hover` - Reveal on mouse enter, hide on mouse leave
 - `click` - Toggle reveal state on click
 - `manual` - Control via `isRevealed` prop
 
 ### Directions
+
 - `in` - Content fades in with radial reveal
 - `out` - Content fades out with radial hide
 - `both` - Supports both in and out animations
 
 ### Easing Options
+
 - `ease` (default)
 - `ease-in`
 - `ease-out`
@@ -161,30 +171,37 @@ Requires support for CSS `clip-path` property. Gracefully degrades to opacity an
 ## Common Patterns
 
 ### Portfolio Logo Reveal
+
 Perfect for revealing portfolio content when hovering over a logo or avatar.
 
 ### Interactive Menu
+
 Use with hamburger menus or navigation triggers for smooth content reveals.
 
 ### Card Hover Effects
+
 Reveal additional content or actions when hovering over cards or tiles.
 
 ### Modal Alternatives
+
 Create non-blocking content reveals that feel more integrated than traditional modals.
 
 ## Troubleshooting
 
 **Animation not visible?**
+
 - Ensure the container has defined dimensions
 - Check that `radius` is large enough to cover the content area
 - Verify the trigger element is positioned within the container
 
 **Performance issues?**
+
 - Reduce `rippleCount` for simpler animations
 - Use shorter `duration` values
 - Consider using `respectReducedMotion={true}` for all users
 
 **Positioning problems?**
+
 - The trigger element position is calculated relative to the container
 - Ensure proper CSS positioning on parent elements
 - Trigger position updates automatically on window resize

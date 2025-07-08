@@ -7,12 +7,7 @@ interface LogoProps {
   className?: string;
 }
 
-export default function Logo({
-  width = 64,
-  height = 64,
-  style,
-  className,
-}: LogoProps) {
+export default function Logo({ width = 64, height = 64, style, className }: LogoProps) {
   return (
     <Image
       src="/jn-logo.png"

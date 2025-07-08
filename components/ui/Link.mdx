@@ -50,6 +50,7 @@ Link is designed specifically for `<a>` elements that handle navigation, externa
 ## Usage Guidelines
 
 ### ✅ Use Link for:
+
 - Internal navigation (route changes)
 - External links to other websites
 - Download links
@@ -57,6 +58,7 @@ Link is designed specifically for `<a>` elements that handle navigation, externa
 - Phone links (`tel:`)
 
 ### ❌ Don't use Link for:
+
 - Click handlers that don't navigate (use `Action` component)
 - Form submissions (use `Action` component)
 - Buttons that trigger UI changes (use `Action` component)
@@ -64,6 +66,7 @@ Link is designed specifically for `<a>` elements that handle navigation, externa
 ## External Link Security
 
 External links (detected automatically or via `external` prop) receive:
+
 - `target="_blank"` - Opens in new tab
 - `rel="noopener noreferrer"` - Security attributes to prevent window.opener access
 

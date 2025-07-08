@@ -1,9 +1,5 @@
 import { CSSProperties, ReactNode, ElementType } from 'react';
-import {
-  SpacingProps,
-  getSpacingStyles,
-  separateSpacingProps,
-} from '@/lib/ui/spacing';
+import { SpacingProps, getSpacingStyles, separateSpacingProps } from '@/lib/ui/spacing';
 import { PolymorphicComponentProps } from '@/lib/ui/polymorphic';
 
 interface UIBaseOwnProps extends SpacingProps {
@@ -12,10 +8,7 @@ interface UIBaseOwnProps extends SpacingProps {
   className?: string;
 }
 
-type UIBaseProps<C extends ElementType = 'div'> = PolymorphicComponentProps<
-  C,
-  UIBaseOwnProps
->;
+type UIBaseProps<C extends ElementType = 'div'> = PolymorphicComponentProps<C, UIBaseOwnProps>;
 
 export default function UIBase<C extends ElementType = 'div'>({
   children,

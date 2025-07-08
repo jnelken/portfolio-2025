@@ -100,7 +100,8 @@ export const AutoDetectExternal: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'External links are auto-detected from the href and get target="_blank" and rel="noopener noreferrer" automatically.',
+        story:
+          'External links are auto-detected from the href and get target="_blank" and rel="noopener noreferrer" automatically.',
       },
     },
   },

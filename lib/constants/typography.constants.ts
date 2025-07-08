@@ -8,7 +8,7 @@ export const TYPOGRAPHY_VARIANTS = {
   h6: { fontSize: '16px', fontWeight: 500, fontFamily: 'var(--font-suisse-intl)' },
   body: { fontSize: '16px', fontWeight: 400, lineHeight: '1.5' },
   caption: { fontSize: '14px', fontWeight: 400, lineHeight: '1.4' },
-  code: { fontFamily: 'var(--font-geist-mono)', fontSize: '14px', fontWeight: 400 }
+  code: { fontFamily: 'var(--font-geist-mono)', fontSize: '14px', fontWeight: 400 },
 } as const;
 
 export const TYPOGRAPHY_SIZES = {
@@ -18,14 +18,14 @@ export const TYPOGRAPHY_SIZES = {
   lg: { fontSize: '18px' },
   xl: { fontSize: '20px' },
   '2xl': { fontSize: '24px' },
-  '3xl': { fontSize: '30px' }
+  '3xl': { fontSize: '30px' },
 } as const;
 
 export const TYPOGRAPHY_WEIGHTS = {
   normal: { fontWeight: 400 },
   medium: { fontWeight: 500 },
   semibold: { fontWeight: 600 },
-  bold: { fontWeight: 700 }
+  bold: { fontWeight: 700 },
 } as const;
 
 // Type exports for better TypeScript support

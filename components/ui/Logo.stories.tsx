@@ -67,7 +67,7 @@ export const DarkBackground: Story = {
     },
   },
   decorators: [
-    (Story) => (
+    Story => (
       <div style={{ padding: '20px', backgroundColor: '#1a1a1a', borderRadius: '8px' }}>
         <Story />
       </div>
@@ -84,14 +84,16 @@ export const DarkBackground: Story = {
 
 export const InNavigation: Story = {
   render: () => (
-    <nav style={{ 
-      display: 'flex', 
-      justifyContent: 'space-between', 
-      alignItems: 'center', 
-      padding: '12px 20px',
-      backgroundColor: '#f8f9fa',
-      borderRadius: '8px'
-    }}>
+    <nav
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '12px 20px',
+        backgroundColor: '#f8f9fa',
+        borderRadius: '8px',
+      }}
+    >
       <Logo width={140} height={30} />
       <div style={{ display: 'flex', gap: '20px', fontSize: '14px' }}>
         <span>Home</span>
@@ -111,12 +113,14 @@ export const InNavigation: Story = {
 
 export const InHeader: Story = {
   render: () => (
-    <header style={{
-      textAlign: 'center',
-      padding: '40px 20px',
-      backgroundColor: '#fff',
-      borderBottom: '1px solid #eee'
-    }}>
+    <header
+      style={{
+        textAlign: 'center',
+        padding: '40px 20px',
+        backgroundColor: '#fff',
+        borderBottom: '1px solid #eee',
+      }}
+    >
       <Logo width={200} height={42} style={{ marginBottom: '10px' }} />
       <p style={{ margin: 0, color: '#666', fontSize: '16px' }}>Portfolio & Design</p>
     </header>
@@ -165,7 +169,7 @@ export const CustomStyling: Story = {
     className: 'logo-hover',
   },
   decorators: [
-    (Story) => (
+    Story => (
       <div>
         <style>{`
           .logo-hover:hover {

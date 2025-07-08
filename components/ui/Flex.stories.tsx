@@ -29,7 +29,7 @@ const meta: Meta<typeof Flex> = {
     },
   },
   decorators: [
-    (Story) => (
+    Story => (
       <div style={{ width: '400px', height: '200px', border: '1px dashed #ccc' }}>
         <Story />
       </div>
@@ -153,7 +153,13 @@ export const WithWrap: Story = {
 
 export const WithSpacing: Story = {
   render: () => (
-    <Flex justify="center" align="center" padding="lg" margin="md" style={{ backgroundColor: '#f5f5f5', height: '100%' }}>
+    <Flex
+      justify="center"
+      align="center"
+      padding="lg"
+      margin="md"
+      style={{ backgroundColor: '#f5f5f5', height: '100%' }}
+    >
       <FlexItem>Spaced Container</FlexItem>
     </Flex>
   ),

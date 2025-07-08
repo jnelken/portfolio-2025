@@ -8,12 +8,7 @@ interface PageLayoutProps extends SpacingProps {
   className?: string;
 }
 
-export default function PageLayout({
-  children,
-  style,
-  className,
-  ...spacingProps
-}: PageLayoutProps) {
+export default function PageLayout({ children, style, className, ...spacingProps }: PageLayoutProps) {
   const layoutStyle: CSSProperties = {
     position: 'relative',
     display: 'grid',
@@ -29,11 +24,7 @@ export default function PageLayout({
   };
 
   return (
-    <UIBase 
-      style={layoutStyle} 
-      className={className}
-      {...spacingProps}
-    >
+    <UIBase style={layoutStyle} className={className} {...spacingProps}>
       {children}
     </UIBase>
   );

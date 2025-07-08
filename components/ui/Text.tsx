@@ -1,13 +1,13 @@
 import { CSSProperties, ReactNode, ElementType } from 'react';
 import { SpacingProps } from '@/lib/ui/spacing';
 import { PolymorphicComponentProps } from '@/lib/ui/polymorphic';
-import { 
-  TYPOGRAPHY_VARIANTS, 
-  TYPOGRAPHY_SIZES, 
+import {
+  TYPOGRAPHY_VARIANTS,
+  TYPOGRAPHY_SIZES,
   TYPOGRAPHY_WEIGHTS,
   TypographyVariant,
   TypographySize,
-  TypographyWeight
+  TypographyWeight,
 } from '@/lib/constants/typography.constants';
 import UIBase from './UIBase';
 
@@ -42,7 +42,7 @@ export default function Text<C extends ElementType = 'p'>({
     textAlign: align,
     color: color || 'var(--foreground)',
     margin: 0,
-    ...style
+    ...style,
   };
 
   // Use the 'as' prop if provided, otherwise use variant-based element or default 'p'

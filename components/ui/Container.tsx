@@ -10,10 +10,7 @@ interface ContainerOwnProps extends SpacingProps {
   className?: string;
 }
 
-type ContainerProps<C extends ElementType = 'div'> = PolymorphicComponentProps<
-  C,
-  ContainerOwnProps
->;
+type ContainerProps<C extends ElementType = 'div'> = PolymorphicComponentProps<C, ContainerOwnProps>;
 
 export default function Container<C extends ElementType = 'div'>({
   children,
