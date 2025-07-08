@@ -27,7 +27,7 @@ export default function Home() {
                 trigger="hover"
                 radius={300}
                 easing="ease-out"
-                rippleCount={2}
+                rippleCount={10}
                 stagger={150}>
                 <Text>
                   Hey, I'm Jake. I have been building user experiences for over{' '}

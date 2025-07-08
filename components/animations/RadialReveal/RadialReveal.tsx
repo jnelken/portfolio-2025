@@ -6,7 +6,7 @@ export default function RadialReveal({
   trigger = 'hover',
   children,
   radius = 200,
-  duration = 800,
+  duration = 1200,
   easing = 'ease-out',
   direction = 'in',
   rippleCount = 1,
@@ -219,7 +219,7 @@ export default function RadialReveal({
           direction === 'out' ? 'hide' : 'reveal'
         } ${duration}ms ${easing} forwards`
       : isAutoFading
-      ? `${animationId}-auto-fade ${duration * 3}ms ${easing} forwards`
+      ? `${animationId}-auto-fade ${duration * 10}ms ${easing} forwards`
       : !isRevealed && !isAutoFading
       ? undefined // Stay at current state
       : direction === 'both'

@@ -19,10 +19,10 @@ function generateWarpParams(seed: number, intensity: number = 1) {
   const seed3 = seededRandom(seed * 3);
   const seed4 = seededRandom(seed * 4);
   const seed5 = seededRandom(seed * 5);
-  
+
   return {
     warpDuration: (12 + seed2 * 12) / Math.max(intensity, 0.1), // 12-24s (faster with higher intensity)
-    scaleMax: 1 + (seed3 * 0.1 * intensity), // 1-1.1
+    scaleMax: 1 + seed3 * 0.1 * intensity, // 1-1.1
     skewMax: seed4 * 5 * intensity, // 0-5deg
     blurMax: (0.5 + seed5 * 2) * intensity, // 0.5-2.5px
     hueRange: seed2 * 30 * intensity, // 0-30deg
@@ -33,7 +33,7 @@ export default function WarpContainer({
   children,
   style,
   className,
-  intensity = 1,
+  intensity = 0.6,
 }: WarpContainerProps) {
   const seed = useMemo(() => Math.floor(Math.random() * 10000), []); // Generate once per component mount
   const params = useMemo(

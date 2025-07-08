@@ -24,12 +24,7 @@ export default function MainContent({
   };
 
   return (
-    <UIBase 
-      as="main"
-      style={mainStyle} 
-      className={className}
-      {...spacingProps}
-    >
+    <UIBase as="main" style={mainStyle} className={className} {...spacingProps}>
       {children}
     </UIBase>
   );
