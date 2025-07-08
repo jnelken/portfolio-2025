@@ -1,0 +1,106 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as LinkStories from './Link.stories';
+
+<Meta of={LinkStories} />
+
+# Link
+
+A semantic link component for navigation and external links.
+
+## Overview
+
+Link is designed specifically for `<a>` elements that handle navigation, external links, and other href-based interactions. It provides automatic detection of external links and proper security attributes.
+
+## Features
+
+- **Navigation-focused** - Only renders `<a>` elements (or custom via `as` prop)
+- **Auto-detection** - Automatically detects external links and adds security attributes
+- **Accessible** - Proper target and rel attributes for external links
+- **Consistent styling** - Uses the design system's button tokens for styled links
+- **Spacing system** - Full margin/padding prop support
+
+## Variants
+
+<Canvas of={LinkStories.Primary} />
+<Canvas of={LinkStories.Secondary} />
+<Canvas of={LinkStories.Outline} />
+
+## Navigation Types
+
+<Canvas of={LinkStories.InternalLink} />
+<Canvas of={LinkStories.ExternalLink} />
+
+## Auto-Detection
+
+<Canvas of={LinkStories.AutoDetectExternal} />
+
+## Sizes
+
+<Canvas of={LinkStories.Small} />
+<Canvas of={LinkStories.Large} />
+
+## Spacing
+
+<Canvas of={LinkStories.WithSpacing} />
+
+## Props
+
+<ArgTypes of={LinkStories} />
+
+## Usage Guidelines
+
+### ✅ Use Link for:
+- Internal navigation (route changes)
+- External links to other websites
+- Download links
+- Email links (`mailto:`)
+- Phone links (`tel:`)
+
+### ❌ Don't use Link for:
+- Click handlers that don't navigate (use `Action` component)
+- Form submissions (use `Action` component)
+- Buttons that trigger UI changes (use `Action` component)
+
+## External Link Security
+
+External links (detected automatically or via `external` prop) receive:
+- `target="_blank"` - Opens in new tab
+- `rel="noopener noreferrer"` - Security attributes to prevent window.opener access
+
+## Examples
+
+```tsx
+// Internal navigation
+<Link href="/about">About Us</Link>
+
+// External link (auto-detected)
+<Link href="https://example.com">Visit Example</Link>
+
+// External link (explicit)
+<Link href="https://example.com" external>
+  External Site
+</Link>
+
+// With styling
+<Link href="/contact" variant="outline" size="lg">
+  Contact Page
+</Link>
+
+// With spacing
+<Link href="/docs" marginTop="md" paddingX="lg">
+  Documentation
+</Link>
+
+// Email link
+<Link href="mailto:hello@example.com">
+  Send Email
+</Link>
+```
+
+## Accessibility
+
+- Uses semantic `<a>` element by default
+- Proper `target` and `rel` attributes for external links
+- Supports all ARIA attributes via props
+- Keyboard accessible (Enter activation)
+- Screen reader friendly with proper link semantics

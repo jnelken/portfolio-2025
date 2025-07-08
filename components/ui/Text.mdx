@@ -1,0 +1,144 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as TextStories from './Text.stories';
+
+<Meta of={TextStories} />
+
+# Text
+
+A flexible typography component for all text content with semantic HTML rendering.
+
+## Overview
+
+Text is designed to handle all typography needs with consistent styling from the design system. It automatically renders with appropriate semantic HTML elements and supports extensive customization options.
+
+## Features
+
+- **Semantic rendering** - Heading variants automatically use correct HTML elements (h1, h2, etc.)
+- **Typography variants** - Predefined styles for headings, body, caption, and code
+- **Size overrides** - Custom sizes that override variant defaults
+- **Weight control** - Font weight customization
+- **Alignment** - Text alignment options
+- **Color support** - Custom color values
+- **Spacing system** - Full margin/padding prop support
+
+## Variants
+
+### Headings
+
+<Canvas of={TextStories.Heading1} />
+<Canvas of={TextStories.Heading2} />
+<Canvas of={TextStories.Heading3} />
+
+### Text Types
+
+<Canvas of={TextStories.Body} />
+<Canvas of={TextStories.Caption} />
+<Canvas of={TextStories.Code} />
+
+## Customization
+
+### Size Override
+
+<Canvas of={TextStories.CustomSize} />
+
+### Weight Override
+
+<Canvas of={TextStories.CustomWeight} />
+
+### Alignment
+
+<Canvas of={TextStories.CenteredText} />
+
+### Color
+
+<Canvas of={TextStories.ColoredText} />
+
+## Polymorphic Rendering
+
+<Canvas of={TextStories.PolymorphicSpan} />
+<Canvas of={TextStories.SemanticHeading} />
+
+## Spacing
+
+<Canvas of={TextStories.WithSpacing} />
+
+## Props
+
+<ArgTypes of={TextStories} />
+
+## Typography Scale
+
+### Variants
+- `h1` - 48px, medium weight, SuisseIntl
+- `h2` - 36px, medium weight, SuisseIntl  
+- `h3` - 24px, medium weight, SuisseIntl
+- `h4` - 20px, medium weight, SuisseIntl
+- `h5` - 18px, medium weight, SuisseIntl
+- `h6` - 16px, medium weight, SuisseIntl
+- `body` - 16px, normal weight, 1.5 line height
+- `caption` - 14px, normal weight, 1.4 line height
+- `code` - 14px, monospace font
+
+### Sizes (Override)
+- `xs` - 12px
+- `sm` - 14px
+- `md` - 16px
+- `lg` - 18px
+- `xl` - 20px
+- `2xl` - 24px
+- `3xl` - 30px
+
+### Weights
+- `normal` - 400
+- `medium` - 500
+- `semibold` - 600
+- `bold` - 700
+
+## Usage Guidelines
+
+### ✅ Use Text for:
+- All text content (headings, paragraphs, captions)
+- Code snippets and inline code
+- Labels and metadata
+- Any text that needs consistent typography
+
+### ❌ Don't use Text for:
+- Interactive elements (use `Action` or `Link`)
+- Form inputs (use dedicated form components)
+
+## Examples
+
+```tsx
+// Basic text
+<Text>Default body text</Text>
+
+// Semantic heading
+<Text variant="h1">Page Title</Text>
+
+// Custom styling
+<Text variant="body" size="lg" weight="bold" align="center">
+  Large, bold, centered text
+</Text>
+
+// Code text
+<Text variant="code">const example = true;</Text>
+
+// Inline text
+<Text as="span" weight="medium">Inline text</Text>
+
+// With spacing
+<Text marginBottom="md" paddingX="sm">
+  Text with custom spacing
+</Text>
+
+// Custom color
+<Text color="#007acc">Colored text</Text>
+```
+
+## Accessibility
+
+- Uses semantic HTML elements automatically (h1-h6 for headings)
+- Supports all ARIA attributes via props
+- Maintains proper heading hierarchy
+- Readable line heights and font sizes
+- Supports custom color with proper contrast consideration

@@ -1,0 +1,151 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as FlexStories from './Flex.stories';
+
+<Meta of={FlexStories} />
+
+# Flex
+
+A flexible layout component that provides easy-to-use CSS Flexbox functionality with semantic props.
+
+## Overview
+
+Flex is a layout component that simplifies CSS Flexbox usage with intuitive prop names. It's designed for creating responsive layouts, aligning content, and distributing space between elements.
+
+## Features
+
+- **Intuitive props** - Easy-to-understand justify, align, direction, and gap props
+- **Flexbox complete** - Supports all major flexbox properties
+- **Polymorphic** - Can render as any HTML element via `as` prop
+- **Spacing system** - Full margin/padding prop support
+- **Type safe** - Full TypeScript support for all flexbox values
+
+## Basic Usage
+
+<Canvas of={FlexStories.Default} />
+
+## Justification (Main Axis)
+
+<Canvas of={FlexStories.CenterJustified} />
+<Canvas of={FlexStories.SpaceBetween} />
+
+## Alignment (Cross Axis)
+
+<Canvas of={FlexStories.CenterAligned} />
+<Canvas of={FlexStories.CenteredBoth} />
+
+## Direction
+
+<Canvas of={FlexStories.Column} />
+<Canvas of={FlexStories.ColumnCentered} />
+
+## Gap and Wrap
+
+<Canvas of={FlexStories.WithGap} />
+<Canvas of={FlexStories.WithWrap} />
+
+## Common Patterns
+
+<Canvas of={FlexStories.Navigation} />
+
+## Polymorphic Usage
+
+<Canvas of={FlexStories.PolymorphicSection} />
+
+## Spacing
+
+<Canvas of={FlexStories.WithSpacing} />
+
+## Props
+
+<ArgTypes of={FlexStories} />
+
+## Prop Reference
+
+### justify (justifyContent)
+- `flex-start` (default) - Items at start of container
+- `flex-end` - Items at end of container
+- `center` - Items centered in container
+- `space-between` - Items distributed with space between
+- `space-around` - Items distributed with space around
+- `space-evenly` - Items distributed with equal space
+
+### align (alignItems)
+- `stretch` (default) - Items stretch to fill container
+- `flex-start` - Items at cross-start
+- `flex-end` - Items at cross-end
+- `center` - Items centered on cross-axis
+- `baseline` - Items aligned to baseline
+
+### direction (flexDirection)
+- `row` (default) - Horizontal left-to-right
+- `column` - Vertical top-to-bottom
+- `row-reverse` - Horizontal right-to-left
+- `column-reverse` - Vertical bottom-to-top
+
+### wrap (flexWrap)
+- `nowrap` (default) - Items stay on one line
+- `wrap` - Items wrap to new lines
+- `wrap-reverse` - Items wrap to new lines in reverse
+
+## Usage Guidelines
+
+### ✅ Use Flex for:
+- Layout containers and wrappers
+- Aligning content horizontally or vertically
+- Creating responsive layouts
+- Navigation bars and headers
+- Card layouts and grids
+- Distributing space between elements
+
+### ❌ Don't use Flex for:
+- Single elements that don't need flex properties
+- Complex grid layouts (consider CSS Grid)
+- Text content (use Text component)
+
+## Common Patterns
+
+```tsx
+// Centered content
+<Flex justify="center" align="center">
+  <div>Centered content</div>
+</Flex>
+
+// Navigation header
+<Flex justify="space-between" align="center">
+  <div>Logo</div>
+  <div>Menu</div>
+</Flex>
+
+// Vertical stack
+<Flex direction="column" gap={16}>
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</Flex>
+
+// Card layout
+<Flex wrap="wrap" gap={20}>
+  <Card />
+  <Card />
+  <Card />
+</Flex>
+
+// Sidebar layout
+<Flex>
+  <aside>Sidebar</aside>
+  <main style={{ flex: 1 }}>Main content</main>
+</Flex>
+
+// With spacing
+<Flex justify="center" padding="lg" margin="md">
+  <div>Spaced container</div>
+</Flex>
+```
+
+## Accessibility
+
+- Uses semantic HTML elements (div by default, customizable with `as`)
+- Supports all ARIA attributes via props
+- Maintains logical tab order
+- Works well with screen readers
+- No accessibility concerns with flex layout itself

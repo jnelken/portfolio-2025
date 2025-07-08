@@ -1,0 +1,89 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as ActionStories from './Action.stories';
+
+<Meta of={ActionStories} />
+
+# Action
+
+A semantic button component for user interactions and form submissions.
+
+## Overview
+
+Action is designed specifically for `<button>` elements that trigger actions, handle form submissions, or respond to user interactions. It provides a clean, focused API without the complexity of handling both buttons and links.
+
+## Features
+
+- **Button-focused** - Only renders `<button>` elements (or custom via `as` prop)
+- **Form-friendly** - Supports `type`, `disabled`, and form submission
+- **Accessible** - Proper disabled state handling
+- **Consistent styling** - Uses the design system's button tokens
+- **Spacing system** - Full margin/padding prop support
+
+## Variants
+
+<Canvas of={ActionStories.Primary} />
+<Canvas of={ActionStories.Secondary} />
+<Canvas of={ActionStories.Outline} />
+
+## Sizes
+
+<Canvas of={ActionStories.Small} />
+<Canvas of={ActionStories.Large} />
+
+## States
+
+<Canvas of={ActionStories.Disabled} />
+
+## Form Usage
+
+<Canvas of={ActionStories.SubmitButton} />
+
+## Spacing
+
+<Canvas of={ActionStories.WithSpacing} />
+
+## Props
+
+<ArgTypes of={ActionStories} />
+
+## Usage Guidelines
+
+### ✅ Use Action for:
+- Click handlers (`onClick`)
+- Form submissions (`type="submit"`)
+- Triggering modals, menus, or other UI changes
+- Any interactive element that performs an action
+
+### ❌ Don't use Action for:
+- Navigation (use `Link` component instead)
+- External links (use `Link` component)
+- Elements that don't perform actions
+
+## Examples
+
+```tsx
+// Basic action
+<Action onClick={handleClick}>Save</Action>
+
+// Form submission
+<Action type="submit" disabled={isLoading}>
+  {isLoading ? 'Saving...' : 'Save Changes'}
+</Action>
+
+// With spacing
+<Action marginTop="md" paddingX="lg">
+  Delete Item
+</Action>
+
+// Custom element (rarely needed)
+<Action as="div" role="button" tabIndex={0}>
+  Custom Interactive Element
+</Action>
+```
+
+## Accessibility
+
+- Uses semantic `<button>` element by default
+- Properly handles `disabled` state
+- Supports all ARIA attributes via props
+- Keyboard accessible (Enter/Space activation)

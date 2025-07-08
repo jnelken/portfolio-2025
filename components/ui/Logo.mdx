@@ -1,0 +1,139 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as LogoStories from './Logo.stories';
+
+<Meta of={LogoStories} />
+
+# Logo
+
+A custom SVG logo component for brand identity with responsive sizing and color theming.
+
+## Overview
+
+Logo is a custom SVG component that displays the brand identity for Jake Nelken's portfolio. It's designed to be scalable, responsive, and theme-aware using `currentColor` for automatic color inheritance.
+
+## Features
+
+- **Scalable SVG** - Vector-based logo that scales perfectly at any size
+- **Color inheritance** - Uses `currentColor` to inherit text color from parent
+- **Responsive sizing** - Easily adjustable width and height props
+- **Custom styling** - Supports style and className props for customization
+- **Brand consistent** - Uses SuisseIntl font and design system elements
+
+## Basic Usage
+
+<Canvas of={LogoStories.Default} />
+
+## Size Variations
+
+<Canvas of={LogoStories.Small} />
+<Canvas of={LogoStories.Large} />
+<Canvas of={LogoStories.ExtraLarge} />
+
+## Color Theming
+
+<Canvas of={LogoStories.CustomColor} />
+<Canvas of={LogoStories.DarkBackground} />
+
+## Common Usage Patterns
+
+<Canvas of={LogoStories.InNavigation} />
+<Canvas of={LogoStories.InHeader} />
+
+## Responsive Sizing
+
+<Canvas of={LogoStories.Responsive} />
+
+## Custom Styling
+
+<Canvas of={LogoStories.CustomStyling} />
+
+## Props
+
+<ArgTypes of={LogoStories} />
+
+## Design Elements
+
+The logo consists of:
+- **Background rectangle** - Rounded corners with subtle fill
+- **Text element** - "Jake Nelken" in SuisseIntl Medium
+- **Accent circle** - Decorative element with dual circle design
+- **Color system** - Uses `currentColor` for theme consistency
+
+## Size Guidelines
+
+### Recommended Sizes
+- **Small/Mobile**: 120×25px - For mobile navigation
+- **Medium/Tablet**: 160×34px - For tablet layouts
+- **Default/Desktop**: 180×38px - Standard desktop size
+- **Large/Hero**: 240×50px - For hero sections
+- **Extra Large**: 360×76px - For prominent displays
+
+### Aspect Ratio
+The logo maintains a consistent aspect ratio of approximately 4.7:1 (width:height).
+
+## Usage Guidelines
+
+### ✅ Use Logo for:
+- Navigation headers
+- Page headers and footers
+- Brand identity sections
+- Email signatures
+- Business cards and print materials
+
+### ❌ Don't use Logo for:
+- Interactive elements (not clickable by default)
+- Decorative purposes unrelated to branding
+- As a background element
+
+## Color Recommendations
+
+The logo works well with these color schemes:
+- **Default**: Inherits current text color
+- **Primary brand**: #007acc or similar blue
+- **Dark themes**: White (#ffffff)
+- **Light themes**: Dark gray (#333333)
+- **High contrast**: Pure black (#000000)
+
+## Examples
+
+```tsx
+// Basic logo
+<Logo />
+
+// Small mobile version
+<Logo width={120} height={25} />
+
+// Custom color
+<Logo style={{ color: '#007acc' }} />
+
+// In navigation
+<nav>
+  <Logo width={140} height={30} />
+  <div>Navigation items...</div>
+</nav>
+
+// In header with custom styling
+<Logo 
+  width={200} 
+  height={42}
+  style={{ 
+    filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))',
+    marginBottom: '20px'
+  }}
+/>
+
+// Responsive logo
+<Logo 
+  width={window.innerWidth < 768 ? 120 : 180}
+  height={window.innerWidth < 768 ? 25 : 38}
+/>
+```
+
+## Accessibility
+
+- Uses semantic SVG structure
+- Includes proper viewBox for scaling
+- Maintains readability at all sizes
+- High contrast between elements
+- Works with screen readers
+- Supports custom aria-label via props if needed

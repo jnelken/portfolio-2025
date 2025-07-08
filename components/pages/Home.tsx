@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Flex from '../ui/Flex';
-import Button from '../ui/Button';
+import Link from '../ui/Link';
 import Text from '../ui/Text';
 import Code from '../ui/Code';
 import Logo from '../ui/Logo';
@@ -65,11 +65,9 @@ export default function Home() {
         </ol>
 
         <Flex gap={16} align="center" direction="column">
-          <Button
+          <Link
             variant="primary"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer">
+            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app">
             <Image
               style={{ filter: 'var(--filter-invert, none)' }}
               src="/vercel.svg"
@@ -78,14 +76,12 @@ export default function Home() {
               height={20}
             />
             Deploy now
-          </Button>
-          <Button
+          </Link>
+          <Link
             variant="outline"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer">
+            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app">
             Read our docs
-          </Button>
+          </Link>
         </Flex>
       </main>
       <footer

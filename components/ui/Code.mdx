@@ -1,0 +1,117 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as CodeStories from './Code.stories';
+
+<Meta of={CodeStories} />
+
+# Code
+
+A specialized component for displaying inline code snippets with consistent monospace styling.
+
+## Overview
+
+Code is designed for inline code elements like variable names, function calls, and short code snippets. It provides consistent monospace typography with a subtle background to distinguish code from regular text.
+
+## Features
+
+- **Monospace font** - Uses the design system's monospace font (Geist Mono)
+- **Subtle styling** - Light background and rounded corners for readability
+- **Inline by default** - Renders as `<code>` element for inline usage
+- **Polymorphic** - Can render as other elements like `<kbd>` via `as` prop
+- **Spacing system** - Full margin/padding prop support
+
+## Basic Usage
+
+<Canvas of={CodeStories.InlineCode} />
+
+## Code Types
+
+### Programming Languages
+
+<Canvas of={CodeStories.JavaScriptSnippet} />
+<Canvas of={CodeStories.HTMLElement} />
+<Canvas of={CodeStories.CSSProperty} />
+
+### Commands and JSON
+
+<Canvas of={CodeStories.TerminalCommand} />
+<Canvas of={CodeStories.JSONSnippet} />
+
+## Inline Usage
+
+<Canvas of={CodeStories.InParagraph} />
+<Canvas of={CodeStories.MultipleInline} />
+
+## Polymorphic Usage
+
+<Canvas of={CodeStories.PolymorphicKbd} />
+
+## Customization
+
+<Canvas of={CodeStories.CustomStyling} />
+
+## Spacing
+
+<Canvas of={CodeStories.WithSpacing} />
+
+## Props
+
+<ArgTypes of={CodeStories} />
+
+## Styling
+
+The Code component uses these default styles:
+- **Font**: Geist Mono (monospace)
+- **Background**: `rgba(0, 0, 0, 0.05)` (subtle gray)
+- **Padding**: `2px 4px`
+- **Border radius**: `4px`
+- **Font weight**: `600` (medium)
+
+## Usage Guidelines
+
+### ✅ Use Code for:
+- Variable names (`useState`, `props.children`)
+- Function calls (`console.log()`, `fetch()`)
+- HTML elements (`<div>`, `<span>`)
+- CSS properties (`margin-top`, `background-color`)
+- Terminal commands (`npm install`, `git commit`)
+- Short code snippets
+- Keyboard shortcuts (with `as="kbd"`)
+
+### ❌ Don't use Code for:
+- Large code blocks (use a dedicated code block component)
+- Non-code text that happens to be monospace
+- Interactive elements (use appropriate interactive components)
+
+## Examples
+
+```tsx
+// Basic inline code
+<Code>const example = true;</Code>
+
+// In text content
+<p>Use the <Code>useState</Code> hook for state management.</p>
+
+// Terminal command
+<Code>npm install react</Code>
+
+// Keyboard shortcut
+<Code as="kbd">Ctrl + C</Code>
+
+// With custom styling
+<Code style={{ backgroundColor: '#f0f8ff', color: '#0066cc' }}>
+  custom styled code
+</Code>
+
+// With spacing
+<Code marginLeft="sm" paddingX="md">
+  spaced code element
+</Code>
+```
+
+## Accessibility
+
+- Uses semantic `<code>` element by default
+- Supports `<kbd>` element for keyboard shortcuts via `as` prop
+- Maintains readable contrast with background
+- Works well with screen readers
+- Supports all ARIA attributes via props

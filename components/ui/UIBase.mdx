@@ -1,0 +1,80 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Foundation/UIBase" />
+
+# UIBase
+
+The foundation component that provides polymorphic rendering and spacing props to all UI components.
+
+## Overview
+
+UIBase is the core component that handles:
+- **Polymorphic rendering** - Can render as any HTML element via the `as` prop
+- **Spacing system** - Consistent margin and padding props
+- **Type safety** - Full TypeScript support for all element attributes
+
+## Features
+
+### Polymorphic Rendering
+```tsx
+<UIBase as="div">Default div</UIBase>
+<UIBase as="section">Renders as section</UIBase>
+<UIBase as="button">Renders as button</UIBase>
+```
+
+### Spacing Props
+```tsx
+<UIBase margin="md" padding="lg">
+<UIBase marginX="sm" paddingY="xl">
+<UIBase marginTop="xs" paddingBottom="md">
+```
+
+### Spacing Scale
+- `none` = 0px
+- `auto` = auto
+- `xxs` = 2px
+- `xs` = 4px
+- `sm` = 8px
+- `md` = 16px
+- `lg` = 32px
+- `xl` = 64px
+- `xxl` = 128px
+
+## Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `as` | `ElementType` | HTML element to render |
+| `children` | `ReactNode` | Content to render |
+| `margin` | `SpacingSize` | All margins |
+| `marginX` | `SpacingSize` | Horizontal margins |
+| `marginY` | `SpacingSize` | Vertical margins |
+| `marginTop` | `SpacingSize` | Top margin |
+| `marginRight` | `SpacingSize` | Right margin |
+| `marginBottom` | `SpacingSize` | Bottom margin |
+| `marginLeft` | `SpacingSize` | Left margin |
+| `padding` | `SpacingSize` | All padding |
+| `paddingX` | `SpacingSize` | Horizontal padding |
+| `paddingY` | `SpacingSize` | Vertical padding |
+| `paddingTop` | `SpacingSize` | Top padding |
+| `paddingRight` | `SpacingSize` | Right padding |
+| `paddingBottom` | `SpacingSize` | Bottom padding |
+| `paddingLeft` | `SpacingSize` | Left padding |
+| `style` | `CSSProperties` | Custom styles |
+| `className` | `string` | CSS classes |
+
+## Usage in Other Components
+
+All UI components are built on top of UIBase:
+
+```tsx
+export default function MyComponent({ children, ...props }) {
+  return (
+    <UIBase as="div" style={myStyles} {...props}>
+      {children}
+    </UIBase>
+  );
+}
+```
+
+This pattern ensures consistency across all components while keeping each component focused on its specific functionality.

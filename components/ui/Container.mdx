@@ -1,0 +1,132 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as ContainerStories from './Container.stories';
+
+<Meta of={ContainerStories} />
+
+# Container
+
+A layout component that provides consistent max-width constraints and centering for content sections.
+
+## Overview
+
+Container is designed to create consistent, centered content areas with optimal reading widths. It's commonly used for page sections, article content, and any content that needs to be constrained and centered.
+
+## Features
+
+- **Automatic centering** - Content is horizontally centered with `margin: 0 auto`
+- **Max-width constraint** - Prevents content from becoming too wide on large screens
+- **Default padding** - Built-in spacing using the design system
+- **Responsive** - Scales down naturally on smaller screens
+- **Polymorphic** - Can render as any HTML element via `as` prop
+- **Spacing system** - Full margin/padding prop support
+
+## Basic Usage
+
+<Canvas of={ContainerStories.Default} />
+
+## Max Width Variations
+
+<Canvas of={ContainerStories.CustomMaxWidth} />
+<Canvas of={ContainerStories.NarrowWidth} />
+<Canvas of={ContainerStories.FullWidth} />
+
+## Padding Control
+
+<Canvas of={ContainerStories.CustomPadding} />
+<Canvas of={ContainerStories.NoPadding} />
+
+## Advanced Usage
+
+<Canvas of={ContainerStories.NestedContainers} />
+<Canvas of={ContainerStories.WithCustomSpacing} />
+
+## Semantic Usage
+
+<Canvas of={ContainerStories.PolymorphicMain} />
+<Canvas of={ContainerStories.ArticleContainer} />
+
+## Props
+
+<ArgTypes of={ContainerStories} />
+
+## Default Values
+
+- **maxWidth**: `1200px` - Optimal width for most content
+- **padding**: `md` (16px) - Comfortable default spacing
+- **as**: `div` - Generic container element
+
+## Usage Guidelines
+
+### ✅ Use Container for:
+- Page sections and content areas
+- Article and blog post content
+- Form containers
+- Card grids and layouts
+- Any content that needs width constraints
+- Centering content horizontally
+
+### ❌ Don't use Container for:
+- Full-width elements (headers, footers, heroes)
+- Elements that should touch screen edges
+- Already constrained elements (inside other containers)
+- Small UI components
+
+## Common Patterns
+
+```tsx
+// Basic page section
+<Container>
+  <h1>Page Title</h1>
+  <p>Page content...</p>
+</Container>
+
+// Article with optimal reading width
+<Container as="article" maxWidth="700px">
+  <h1>Article Title</h1>
+  <p>Article content...</p>
+</Container>
+
+// Main content area
+<Container as="main" padding="lg">
+  <section>Content sections...</section>
+</Container>
+
+// Narrow form container
+<Container maxWidth={500} padding="xl">
+  <form>Form elements...</form>
+</Container>
+
+// Full-width override
+<Container maxWidth="none" style={{ maxWidth: 'none' }}>
+  <div>Full-width content</div>
+</Container>
+
+// With custom spacing
+<Container marginY="xl" paddingBottom="xxl">
+  <div>Spaced content</div>
+</Container>
+```
+
+## Responsive Behavior
+
+The Container component is fully responsive:
+
+1. **Large screens**: Content is centered with max-width constraint
+2. **Medium screens**: Container takes full width with padding
+3. **Small screens**: Padding adjusts to maintain readability
+
+## Max Width Guidelines
+
+- **1200px** (default) - General content, multiple columns
+- **900px** - Single column layouts, dashboards
+- **700px** - Articles, blog posts (optimal reading width)
+- **600px** - Forms, narrow content
+- **500px** - Login forms, modals
+
+## Accessibility
+
+- Uses semantic HTML elements (customizable with `as`)
+- Supports all ARIA attributes via props
+- Maintains proper content flow and reading order
+- No accessibility concerns with centering/width constraints
+- Works well with screen readers and keyboard navigation
