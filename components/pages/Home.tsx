@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Flex from '../ui/Flex';
 import Button from '../ui/Button';
 import Text from '../ui/Text';
+import Code from '../ui/Code';
 
 export default function Home() {
   return (
@@ -38,16 +39,7 @@ export default function Home() {
         <Text style={{ textAlign: 'center' }}>
           Hey, I'm Jake. I write excellent fullstack code and have been building
           satisfying user experiences for over{' '}
-          <code
-            style={{
-              backgroundColor: 'rgba(0, 0, 0, 0.05)',
-              padding: '2px 4px',
-              borderRadius: '4px',
-              fontFamily: 'var(--font-geist-mono)',
-              fontWeight: 600,
-            }}>
-            10
-          </code>{' '}
+          <Code>10</Code>{' '}
           years.
         </Text>
         <Text>Some facts about me:</Text>

@@ -73,6 +73,16 @@ export const INPUT_BASE_STYLE: CSSProperties = {
   transition: 'all 0.2s ease'
 };
 
+// Code component design tokens
+export const CODE_BASE_STYLE: CSSProperties = {
+  backgroundColor: 'rgba(0, 0, 0, 0.05)',
+  padding: '2px 4px',
+  borderRadius: '4px',
+  fontFamily: 'var(--font-geist-mono)',
+  fontWeight: 600,
+  fontSize: 'inherit'
+};
+
 // Type exports for better TypeScript support
 export type ButtonVariant = keyof typeof BUTTON_VARIANTS;
 export type ButtonSize = keyof typeof BUTTON_SIZES;
