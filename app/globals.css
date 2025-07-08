@@ -2,6 +2,17 @@
   --background: #ffffff;
   --foreground: #171717;
   --font-suisse-intl-regular: 'SuisseIntl-Regular', Arial, Helvetica, sans-serif;
+  
+  /* Spacing system custom properties */
+  --spacing-none: 0;
+  --spacing-auto: auto;
+  --spacing-xxs: 2px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 32px;
+  --spacing-xl: 64px;
+  --spacing-xxl: 128px;
 }
 
 @media (prefers-color-scheme: dark) {

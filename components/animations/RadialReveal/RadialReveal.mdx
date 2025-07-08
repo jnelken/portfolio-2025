@@ -1,0 +1,190 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as RadialRevealStories from './RadialReveal.stories';
+
+<Meta of={RadialRevealStories} />
+
+# RadialReveal
+
+A reusable React component that reveals content with a smooth radial animation emanating from a trigger element. Perfect for creating engaging hover effects, interactive logos, and attention-grabbing content reveals.
+
+## Overview
+
+RadialReveal creates a circular reveal animation that grows outward from the trigger element's position. It supports multiple trigger modes, customizable animations, and accessibility features like respecting reduced motion preferences.
+
+## Features
+
+- **Multiple Trigger Modes** - Hover, click, or manual control
+- **Flexible Positioning** - Animation origin automatically follows trigger element
+- **Ripple Effects** - Optional multiple ripple animations with staggered timing
+- **Accessibility** - Respects `prefers-reduced-motion` user preference
+- **TypeScript** - Full type safety with comprehensive prop interfaces
+- **Zero Dependencies** - Pure React with no external libraries
+- **Performance Optimized** - Efficient CSS animations with proper cleanup
+
+## Basic Usage
+
+<Canvas of={RadialRevealStories.HoverTrigger} />
+
+<Canvas of={RadialRevealStories.ClickTrigger} />
+
+## Advanced Examples
+
+### With Ripple Effects
+
+<Canvas of={RadialRevealStories.WithRipples} />
+
+### Logo Interaction Example
+
+<Canvas of={RadialRevealStories.LogoExample} />
+
+## Animation Speed Variations
+
+<Canvas of={RadialRevealStories.FastAnimation} />
+<Canvas of={RadialRevealStories.SlowAnimation} />
+
+## Props
+
+<ArgTypes of={RadialRevealStories} />
+
+## Installation
+
+### NPM Installation (Future)
+```bash
+npm install @jakenelken/animations
+```
+
+```jsx
+import { RadialReveal } from '@jakenelken/animations';
+```
+
+### Copy-Paste Installation
+Copy the component files from this repository:
+- `RadialReveal.tsx`
+- `types.ts`
+- `index.ts`
+
+## Usage Examples
+
+### Basic Hover Reveal
+```jsx
+<RadialReveal 
+  triggerElement={<button>Hover me</button>}
+  trigger="hover"
+>
+  <div>Content to reveal</div>
+</RadialReveal>
+```
+
+### Click Toggle with Ripples
+```jsx
+<RadialReveal 
+  triggerElement={<Logo />}
+  trigger="click"
+  radius={300}
+  duration={800}
+  rippleCount={3}
+  stagger={150}
+>
+  <NavigationMenu />
+</RadialReveal>
+```
+
+### Manual Control
+```jsx
+const [isOpen, setIsOpen] = useState(false);
+
+<RadialReveal 
+  triggerElement={<MenuButton onClick={() => setIsOpen(!isOpen)} />}
+  trigger="manual"
+  isRevealed={isOpen}
+  onRevealComplete={() => console.log('Animation complete')}
+>
+  <MobileMenu />
+</RadialReveal>
+```
+
+### Custom Styling
+```jsx
+<RadialReveal 
+  triggerElement={<CustomTrigger />}
+  trigger="hover"
+  className="my-reveal"
+  style={{ borderRadius: '12px' }}
+>
+  <Content />
+</RadialReveal>
+```
+
+## Animation Properties
+
+### Trigger Modes
+- `hover` - Reveal on mouse enter, hide on mouse leave
+- `click` - Toggle reveal state on click
+- `manual` - Control via `isRevealed` prop
+
+### Directions
+- `in` - Content fades in with radial reveal
+- `out` - Content fades out with radial hide
+- `both` - Supports both in and out animations
+
+### Easing Options
+- `ease` (default)
+- `ease-in`
+- `ease-out`
+- `ease-in-out`
+- `linear`
+- Custom cubic-bezier values
+
+## Performance Considerations
+
+- Animations use CSS `clip-path` for hardware acceleration
+- Keyframes are dynamically generated and cleaned up
+- Respects `prefers-reduced-motion` for accessibility
+- Efficient event handling with proper cleanup
+
+## Accessibility
+
+- Automatically respects user's motion preferences
+- Falls back to opacity transitions when motion is reduced
+- Maintains keyboard accessibility of trigger elements
+- Screen reader friendly with proper ARIA support
+
+## Browser Support
+
+- Chrome 55+
+- Firefox 54+
+- Safari 13.1+
+- Edge 79+
+
+Requires support for CSS `clip-path` property. Gracefully degrades to opacity animations on older browsers.
+
+## Common Patterns
+
+### Portfolio Logo Reveal
+Perfect for revealing portfolio content when hovering over a logo or avatar.
+
+### Interactive Menu
+Use with hamburger menus or navigation triggers for smooth content reveals.
+
+### Card Hover Effects
+Reveal additional content or actions when hovering over cards or tiles.
+
+### Modal Alternatives
+Create non-blocking content reveals that feel more integrated than traditional modals.
+
+## Troubleshooting
+
+**Animation not visible?**
+- Ensure the container has defined dimensions
+- Check that `radius` is large enough to cover the content area
+- Verify the trigger element is positioned within the container
+
+**Performance issues?**
+- Reduce `rippleCount` for simpler animations
+- Use shorter `duration` values
+- Consider using `respectReducedMotion={true}` for all users
+
+**Positioning problems?**
+- The trigger element position is calculated relative to the container
+- Ensure proper CSS positioning on parent elements
+- Trigger position updates automatically on window resize

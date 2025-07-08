@@ -1,10 +1,9 @@
-import { CSSProperties } from 'react';
 import Image from 'next/image';
 
 interface LogoProps {
   width?: number;
   height?: number;
-  style?: CSSProperties;
+  style?: React.CSSProperties;
   className?: string;
 }
 
