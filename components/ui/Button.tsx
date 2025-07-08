@@ -4,11 +4,7 @@ import {
   MouseEventHandler,
   ElementType,
 } from 'react';
-import {
-  SpacingProps,
-  getSpacingStyles,
-  separateSpacingProps,
-} from '@/lib/ui/spacing';
+import { SpacingProps } from '@/lib/ui/spacing';
 import { PolymorphicComponentProps } from '@/lib/ui/polymorphic';
 import {
   BUTTON_VARIANTS,
@@ -17,6 +13,7 @@ import {
   ButtonVariant,
   ButtonSize,
 } from '@/lib/constants/form.constants';
+import UIBase from './UIBase';
 
 interface ButtonOwnProps extends SpacingProps {
   children: ReactNode;
@@ -45,38 +42,36 @@ export default function Button<C extends ElementType = 'button'>({
   target,
   rel,
   style,
-  className,
   ...rest
 }: ButtonProps<C>) {
-  const [spacingProps, otherProps] = separateSpacingProps(rest);
-
   const buttonStyle: CSSProperties = {
     ...BUTTON_BASE_STYLE,
     ...BUTTON_SIZES[size],
     ...BUTTON_VARIANTS[variant],
-    ...getSpacingStyles(spacingProps),
     ...style,
   };
 
   // Determine component based on props
-  let Component: ElementType;
+  let element: ElementType;
   if (as) {
-    Component = as;
+    element = as;
   } else if (href) {
-    Component = 'a';
+    element = 'a';
   } else {
-    Component = 'button';
+    element = 'button';
   }
+
+  const { onClick: buttonClick, ...otherProps } = rest;
 
   const componentProps = {
     ...(href && { href, target, rel }),
-    ...(onClick && Component === 'button' && { onClick }),
+    ...(onClick && element === 'button' && { onClick }),
     ...otherProps,
   };
 
   return (
-    <Component style={buttonStyle} className={className} {...componentProps}>
+    <UIBase as={element} style={buttonStyle} {...componentProps}>
       {children}
-    </Component>
+    </UIBase>
   );
 }

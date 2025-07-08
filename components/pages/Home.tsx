@@ -5,6 +5,7 @@ import Flex from '../ui/Flex';
 import Button from '../ui/Button';
 import Text from '../ui/Text';
 import Code from '../ui/Code';
+import Logo from '../ui/Logo';
 
 export default function Home() {
   return (
@@ -28,13 +29,9 @@ export default function Home() {
           gridRowStart: 2,
           alignItems: 'center',
         }}>
-        <Image
-          style={{ filter: 'var(--filter-invert, none)' }}
-          src="/next.svg"
-          alt="Next.js logo"
+        <Logo
           width={180}
           height={38}
-          priority
         />
         <Text style={{ textAlign: 'center' }}>
           Hey, I'm Jake. I write excellent fullstack code and have been building

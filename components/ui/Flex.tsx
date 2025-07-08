@@ -1,10 +1,7 @@
 import { CSSProperties, ReactNode, ElementType } from 'react';
-import {
-  SpacingProps,
-  getSpacingStyles,
-  separateSpacingProps,
-} from '@/lib/ui/spacing';
+import { SpacingProps } from '@/lib/ui/spacing';
 import { PolymorphicComponentProps } from '@/lib/ui/polymorphic';
+import UIBase from './UIBase';
 
 interface FlexOwnProps extends SpacingProps {
   children: ReactNode;
@@ -30,19 +27,15 @@ type FlexProps<C extends ElementType = 'div'> = PolymorphicComponentProps<
 
 export default function Flex<C extends ElementType = 'div'>({
   children,
-  as,
+  as = 'div' as C,
   justify = 'flex-start',
   align = 'stretch',
   direction = 'row',
   gap = 0,
   wrap = 'nowrap',
   style,
-  className,
   ...rest
 }: FlexProps<C>) {
-  const Component = as || 'div';
-  const [spacingProps, otherProps] = separateSpacingProps(rest);
-
   const flexStyle: CSSProperties = {
     display: 'flex',
     justifyContent: justify,
@@ -50,13 +43,12 @@ export default function Flex<C extends ElementType = 'div'>({
     flexDirection: direction,
     gap: typeof gap === 'number' ? `${gap}px` : gap,
     flexWrap: wrap,
-    ...getSpacingStyles(spacingProps),
     ...style,
   };
 
   return (
-    <Component style={flexStyle} className={className} {...otherProps}>
+    <UIBase as={as} style={flexStyle} {...rest}>
       {children}
-    </Component>
+    </UIBase>
   );
 }

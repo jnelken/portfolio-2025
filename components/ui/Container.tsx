@@ -1,10 +1,7 @@
 import { CSSProperties, ReactNode, ElementType } from 'react';
-import {
-  SpacingProps,
-  getSpacingStyles,
-  separateSpacingProps,
-} from '@/lib/ui/spacing';
+import { SpacingProps } from '@/lib/ui/spacing';
 import { PolymorphicComponentProps } from '@/lib/ui/polymorphic';
+import UIBase from './UIBase';
 
 interface ContainerOwnProps extends SpacingProps {
   children: ReactNode;
@@ -20,30 +17,22 @@ type ContainerProps<C extends ElementType = 'div'> = PolymorphicComponentProps<
 
 export default function Container<C extends ElementType = 'div'>({
   children,
-  as,
+  as = 'div' as C,
   maxWidth = '1200px',
   padding = 'md',
   style,
-  className,
   ...rest
 }: ContainerProps<C>) {
-  const Component = as || 'div';
-  const [spacingProps, otherProps] = separateSpacingProps({
-    padding,
-    ...rest,
-  });
-
   const containerStyle: CSSProperties = {
     width: '100%',
     maxWidth: typeof maxWidth === 'number' ? `${maxWidth}px` : maxWidth,
     margin: '0 auto',
-    ...getSpacingStyles(spacingProps),
     ...style,
   };
 
   return (
-    <Component style={containerStyle} className={className} {...otherProps}>
+    <UIBase as={as} style={containerStyle} padding={padding} {...rest}>
       {children}
-    </Component>
+    </UIBase>
   );
 }
