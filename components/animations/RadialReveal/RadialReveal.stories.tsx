@@ -100,7 +100,7 @@ export const HoverTrigger: Story = {
     direction: 'in',
     rippleCount: 1,
   },
-  render: args => (
+  render: (args: any) => (
     <div
       style={{
         width: '400px',
@@ -109,7 +109,15 @@ export const HoverTrigger: Story = {
         position: 'relative',
       }}
     >
-      <RadialReveal {...args}>
+      <RadialReveal
+        TriggerComponent={args.TriggerComponent}
+        trigger={args.trigger}
+        radius={args.radius}
+        duration={args.duration}
+        easing={args.easing}
+        direction={args.direction}
+        rippleCount={args.rippleCount}
+      >
         <DemoContent />
       </RadialReveal>
     </div>
@@ -127,7 +135,7 @@ export const ClickTrigger: Story = {
     rippleCount: 2,
     stagger: 100,
   },
-  render: args => (
+  render: (args: any) => (
     <div
       style={{
         width: '400px',
@@ -154,7 +162,7 @@ export const WithRipples: Story = {
     rippleCount: 3,
     stagger: 150,
   },
-  render: args => (
+  render: (args: any) => (
     <div
       style={{
         width: '500px',
@@ -203,7 +211,7 @@ export const LogoExample: Story = {
     rippleCount: 2,
     stagger: 100,
   },
-  render: args => (
+  render: (args: any) => (
     <div
       style={{
         width: '600px',
@@ -270,7 +278,7 @@ export const FastAnimation: Story = {
     direction: 'in',
     rippleCount: 1,
   },
-  render: args => (
+  render: (args: any) => (
     <div
       style={{
         width: '400px',
@@ -296,7 +304,7 @@ export const SlowAnimation: Story = {
     direction: 'in',
     rippleCount: 1,
   },
-  render: args => (
+  render: (args: any) => (
     <div
       style={{
         width: '400px',

@@ -29,7 +29,7 @@ const DemoContent = () => (
   <div style={{ backgroundColor: '#e3f2fd', padding: '20px', borderRadius: '8px', border: '1px solid #2196f3' }}>
     <h3 style={{ margin: '0 0 10px 0', color: '#1976d2' }}>Container Content</h3>
     <p style={{ margin: 0, color: '#424242' }}>
-      This content is centered and constrained by the container's max width. Resize the viewport to see how the
+      This content is centered and constrained by the container&apos;s max width. Resize the viewport to see how the
       container responds to different screen sizes.
     </p>
   </div>
@@ -185,8 +185,8 @@ export const ArticleContainer: Story = {
           spacing for content.
         </p>
         <p style={{ margin: 0, lineHeight: '1.6', color: '#555' }}>
-          The max-width ensures lines don't become too long to read comfortably, while the padding provides breathing
-          room around the content.
+          The max-width ensures lines don&apos;t become too long to read comfortably, while the padding provides
+          breathing room around the content.
         </p>
       </div>
     </Container>

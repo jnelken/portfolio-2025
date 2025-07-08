@@ -31,7 +31,7 @@ export default function Home() {
                 stagger={150}
               >
                 <Text>
-                  Hey, I'm Jake. I have been building user experiences for over <Code>10</Code> years.
+                  Hey, I&apos;m Jake. I have been building user experiences for over <Code>10</Code> years.
                 </Text>
 
                 <ol
@@ -48,7 +48,7 @@ export default function Home() {
                       letterSpacing: '-0.01em',
                     }}
                   >
-                    I'm currently working at{' '}
+                    I&apos;m currently working at{' '}
                     <a
                       href="https://www.datadoghq.com"
                       target="_blank"
