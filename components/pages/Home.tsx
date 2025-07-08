@@ -7,11 +7,13 @@ import Text from '../ui/Text';
 import Code from '../ui/Code';
 import Logo from '../ui/Logo';
 import Footer from '../ui/Footer';
+import NoiseBackground from '../ui/NoiseBackground';
 
 export default function Home() {
   return (
     <div
       style={{
+        position: 'relative',
         display: 'grid',
         gridTemplateRows: '20px 1fr 20px',
         alignItems: 'center',
@@ -22,6 +24,7 @@ export default function Home() {
         gap: '64px',
         fontFamily: 'var(--font-suisse-intl)',
       }}>
+      <NoiseBackground />
       <main
         style={{
           display: 'flex',
