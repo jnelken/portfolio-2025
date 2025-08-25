@@ -1,3 +1,4 @@
+'use client';
 import { CSSProperties, ReactNode, useMemo, useEffect } from 'react';
 
 interface WarpContainerProps {
@@ -73,6 +74,7 @@ export default function WarpContainer({ children, style, className, intensity = 
   }, [animationName, params]);
 
   const warpStyle: CSSProperties = {
+    overflow: 'hidden',
     animation: `${animationName} ${params.warpDuration}s ease-in-out infinite`,
     ...style,
   };

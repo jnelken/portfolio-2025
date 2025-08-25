@@ -68,7 +68,7 @@ export default function RadialReveal({
       onRevealStart?.();
 
       // Set up the auto-fade sequence: reveal (duration) + hold (duration) + fade (3x duration)
-      const totalHoldTime = duration + duration; // reveal time + hold time
+      const totalHoldTime = duration * 10; // reveal time + hold time
       fadeTimeoutRef.current = setTimeout(() => {
         setIsAutoFading(true);
         setInternalIsRevealed(false);

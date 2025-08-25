@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Geist_Mono } from 'next/font/google';
 import localFont from 'next/font/local';
 import './globals.css';
+import WarpContainer from '@/components/ui/WarpContainer';
 
 const suisseIntl = localFont({
   src: [
@@ -36,7 +37,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${suisseIntl.variable} ${geistMono.variable} antialiased`}>{children}</body>
+      {/* <body className={`${suisseIntl.variable} ${geistMono.variable} antialiased`}>{children}</body> */}
+      <body>{children}</body>
     </html>
   );
 }

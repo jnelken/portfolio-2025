@@ -1,3 +1,4 @@
+'use client';
 import { CSSProperties, useMemo } from 'react';
 
 interface NoiseBackgroundProps {
@@ -23,7 +24,7 @@ function generateFromSeed(seed: number) {
     resolution: Math.floor(15 + base * 15), // 15-30px
     opacity: 0.3 + seed2 * 0.4, // 0.3-0.7
     shiftDuration: 8 + seed3 * 8, // 8-16s
-    warpDuration: 12 + seed4 * 12, // 12-24s
+    warpDuration: 48 + seed4 * 12, // 12-24s
     scaleMax: 1 + seed5 * 0.05, // 1-1.05
     skewMax: seed2 * 2, // 0-2deg
     blurMax: 0.3 + seed3 * 1, // 0.3-1.3px

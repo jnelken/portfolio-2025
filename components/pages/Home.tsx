@@ -64,14 +64,7 @@ export default function Home() {
 
                 <Flex gap={16} align="center" direction="column">
                   <Link variant="primary" href="mailto:jake.nelken@gmail.com">
-                    <Image
-                      style={{ filter: 'var(--filter-invert, none)' }}
-                      src="/jn-logo.png"
-                      alt="Jake Nelken"
-                      width={24}
-                      height={24}
-                    />
-                    Ask me
+                    Email me
                   </Link>
                   <Link
                     variant="outline"
