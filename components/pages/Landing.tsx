@@ -5,6 +5,8 @@ import WarpContainer from '@/components/ui/WarpContainer';
 import Flex from '@/components/ui/Flex';
 import { useState } from 'react';
 
+const BACKGROUND_COLOR = '#fbf2eb';
+
 const LINK_STYLE = {
   textDecoration: 'underline',
   color: 'var(--foreground)',
@@ -48,7 +50,7 @@ const whiteOnBlack = (clipPathA: number, clipPathB: number) => ({
   width: '100%',
   height: '100%',
   clipPath: `polygon(0 0, ${clipPathB}% 0, ${clipPathA}% 100%, 0 100%)`,
-  backgroundColor: invertHexColor('#fbf2eb'),
+  backgroundColor: BACKGROUND_COLOR,
   zIndex: 2,
 });
 
@@ -111,7 +113,7 @@ export default function Landing() {
       justify="center"
       align="center"
       style={{
-        backgroundColor: '#fbf2eb',
+        backgroundColor: invertHexColor(BACKGROUND_COLOR),
         width: '100%',
         height: '100%',
         ...containerStyles,
