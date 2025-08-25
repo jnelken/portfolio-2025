@@ -73,7 +73,12 @@ export default function Home() {
                     />
                     Ask me
                   </Link>
-                  <Link variant="outline" href="#">
+                  <Link
+                    variant="outline"
+                    href="https://docs.google.com/document/d/1wljBCktOGGqXWqxlf1TtIl36SfncD-2_8RiEWolruf8/edit?tab=t.0"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     See my resume
                   </Link>
                 </Flex>
