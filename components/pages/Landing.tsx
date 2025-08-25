@@ -74,7 +74,7 @@ const LandingContent = ({ yoe }: { yoe: number }) => (
       <p>
         I have been building full-stack applications in React for over <Code>{yoe}</Code> years.
       </p>
-      <p>I recently left Datadog after 6 years and am now looking to start my next chapter.</p>
+      <p>I recently left Datadog and am now looking to start my next chapter.</p>
       <p>
         <a
           href="https://docs.google.com/document/d/1wljBCktOGGqXWqxlf1TtIl36SfncD-2_8RiEWolruf8/edit?tab=t.0"
@@ -88,6 +88,7 @@ const LandingContent = ({ yoe }: { yoe: number }) => (
         <a href="mailto:jake.nelken@gmail.com" style={LINK_STYLE}>
           email me
         </a>
+        .
       </p>
       <p>Thanks for stopping by!</p>
     </div>
