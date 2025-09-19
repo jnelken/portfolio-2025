@@ -6,6 +6,7 @@ import Flex from '@/components/ui/Flex';
 import { useState } from 'react';
 
 const BACKGROUND_COLOR = '#fbf2eb';
+const EMAIL_ADDRESS = 'talkto@jakenelken.com';
 
 const LINK_STYLE = {
   textDecoration: 'underline',
@@ -41,7 +42,17 @@ const containerStyles = {
 const CLIP_PATH_A = 60;
 const CLIP_PATH_B = 40;
 
-const whiteOnBlack = (clipPathA: number, clipPathB: number) => ({
+// Helper function to generate random clip path values
+const generateRandomClipPath = () => {
+  const newClipPathA = Math.floor(Math.random() * 100);
+  const isLeft = Math.random() > 0.5;
+  const a = isLeft ? newClipPathA : 100 - newClipPathA;
+  const b = isLeft ? 100 - newClipPathA : newClipPathA;
+  return { a, b };
+};
+
+// Helper function to create white on black clip path style
+const createWhiteOnBlackStyle = (clipPathA: number, clipPathB: number) => ({
   position: 'absolute' as const,
   top: 0,
   left: 0,
@@ -54,7 +65,8 @@ const whiteOnBlack = (clipPathA: number, clipPathB: number) => ({
   zIndex: 2,
 });
 
-const blackOnWhite = (clipPathA: number, clipPathB: number) => ({
+// Helper function to create black on white clip path style
+const createBlackOnWhiteStyle = (clipPathA: number, clipPathB: number) => ({
   position: 'absolute' as const,
   top: 0,
   left: 0,
@@ -85,7 +97,7 @@ const LandingContent = ({ yoe }: { yoe: number }) => (
           See my resume
         </a>{' '}
         or{' '}
-        <a href="mailto:jake.nelken@gmail.com" style={LINK_STYLE}>
+        <a href={`mailto:${EMAIL_ADDRESS}`} style={LINK_STYLE}>
           email me
         </a>
         .
@@ -101,16 +113,15 @@ export default function Landing() {
   const [clipPathA, setClipPathA] = useState(CLIP_PATH_A);
   const [clipPathB, setClipPathB] = useState(CLIP_PATH_B);
 
+  const handleClick = () => {
+    const { a, b } = generateRandomClipPath();
+    setClipPathA(a);
+    setClipPathB(b);
+  };
+
   return (
     <Flex
-      onClick={() => {
-        const newClipPathA = Math.floor(Math.random() * 100);
-        const isLeft = Math.random() > 0.5;
-        const a = isLeft ? newClipPathA : 100 - newClipPathA;
-        const b = isLeft ? 100 - newClipPathA : newClipPathA;
-        setClipPathA(a);
-        setClipPathB(b);
-      }}
+      onClick={handleClick}
       justify="center"
       align="center"
       style={{
@@ -122,10 +133,10 @@ export default function Landing() {
     >
       {/* <NoiseBackground /> */}
       {/* <WarpContainer intensity={0.2}> */}
-      <div style={{ ...whiteOnBlack(clipPathA, clipPathB) }}>
+      <div style={createWhiteOnBlackStyle(clipPathA, clipPathB)}>
         <LandingContent yoe={yoe} />
       </div>
-      <div style={{ ...blackOnWhite(clipPathA, clipPathB) }}>
+      <div style={createBlackOnWhiteStyle(clipPathA, clipPathB)}>
         <LandingContent yoe={yoe} />
       </div>
       {/* </WarpContainer> */}
