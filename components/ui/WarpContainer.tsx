@@ -30,9 +30,17 @@ function generateWarpParams(seed: number, intensity: number = 1) {
   };
 }
 
-export default function WarpContainer({ children, style, className, intensity = 0.6 }: WarpContainerProps) {
+export default function WarpContainer({
+  children,
+  style,
+  className,
+  intensity = 0.6,
+}: WarpContainerProps) {
   const seed = useMemo(() => Math.floor(Math.random() * 10000), []); // Generate once per component mount
-  const params = useMemo(() => generateWarpParams(seed, intensity), [seed, intensity]);
+  const params = useMemo(
+    () => generateWarpParams(seed, intensity),
+    [seed, intensity],
+  );
 
   const animationName = `warp-${seed}`;
 

@@ -1,6 +1,15 @@
 import { CSSProperties } from 'react';
 
-export type SpacingSize = 'none' | 'auto' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+export type SpacingSize =
+  | 'none'
+  | 'auto'
+  | 'xxs'
+  | 'xs'
+  | 'sm'
+  | 'md'
+  | 'lg'
+  | 'xl'
+  | 'xxl';
 
 export const spacingToPx: Record<SpacingSize, string> = {
   none: '0',

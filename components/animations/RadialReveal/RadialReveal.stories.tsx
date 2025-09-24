@@ -9,7 +9,8 @@ const meta: Meta<typeof RadialReveal> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'A reusable component that reveals content with a radial animation from a trigger element.',
+        component:
+          'A reusable component that reveals content with a radial animation from a trigger element.',
       },
     },
   },
@@ -68,7 +69,8 @@ const DemoContent = () => (
   <div style={{ padding: '40px', textAlign: 'center', maxWidth: '300px' }}>
     <h3 style={{ margin: '0 0 16px 0', color: '#333' }}>Hidden Content</h3>
     <p style={{ margin: '0 0 16px 0', color: '#666', lineHeight: '1.5' }}>
-      This content appears with a radial reveal animation from the trigger element.
+      This content appears with a radial reveal animation from the trigger
+      element.
     </p>
     <button
       style={{
@@ -230,8 +232,12 @@ export const LogoExample: Story = {
           }}
         >
           <h2 style={{ margin: '0 0 20px 0' }}>Jake Nelken</h2>
-          <p style={{ margin: '0 0 20px 0', opacity: 0.8 }}>Frontend Engineer & Creative Developer</p>
-          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
+          <p style={{ margin: '0 0 20px 0', opacity: 0.8 }}>
+            Frontend Engineer & Creative Developer
+          </p>
+          <div
+            style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}
+          >
             <button
               style={{
                 padding: '8px 16px',

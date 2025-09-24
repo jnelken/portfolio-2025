@@ -31,7 +31,8 @@ export default function Home() {
                 stagger={150}
               >
                 <Text>
-                  Hey, I&apos;m Jake. I have been building user experiences for over <Code>10</Code> years.
+                  Hey, I&apos;m Jake. I have been building user experiences for
+                  over <Code>10</Code> years.
                 </Text>
 
                 <ol
@@ -59,7 +60,10 @@ export default function Home() {
                     </a>{' '}
                     as a Senior Software Engineer.
                   </li>
-                  <li>I enjoy building visuals that are both functional and beautiful.</li>
+                  <li>
+                    I enjoy building visuals that are both functional and
+                    beautiful.
+                  </li>
                 </ol>
 
                 <Flex gap={16} align="center" direction="column">

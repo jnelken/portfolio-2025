@@ -75,7 +75,8 @@ export const PolymorphicKbd: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Using the `as` prop to render as a keyboard input element for showing keyboard shortcuts.',
+        story:
+          'Using the `as` prop to render as a keyboard input element for showing keyboard shortcuts.',
       },
     },
   },
@@ -99,7 +100,8 @@ export const InParagraph: Story = {
 export const MultipleInline: Story = {
   render: () => (
     <p>
-      Import components with <Code>import</Code> and export with <Code>export default</Code>.
+      Import components with <Code>import</Code> and export with{' '}
+      <Code>export default</Code>.
     </p>
   ),
   parameters: {

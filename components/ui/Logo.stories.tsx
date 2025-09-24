@@ -54,7 +54,8 @@ export const CustomColor: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Logo with custom color using the `style` prop. The logo uses `currentColor` so it inherits text color.',
+        story:
+          'Logo with custom color using the `style` prop. The logo uses `currentColor` so it inherits text color.',
       },
     },
   },
@@ -68,7 +69,13 @@ export const DarkBackground: Story = {
   },
   decorators: [
     Story => (
-      <div style={{ padding: '20px', backgroundColor: '#1a1a1a', borderRadius: '8px' }}>
+      <div
+        style={{
+          padding: '20px',
+          backgroundColor: '#1a1a1a',
+          borderRadius: '8px',
+        }}
+      >
         <Story />
       </div>
     ),
@@ -122,7 +129,9 @@ export const InHeader: Story = {
       }}
     >
       <Logo width={200} height={42} style={{ marginBottom: '10px' }} />
-      <p style={{ margin: 0, color: '#666', fontSize: '16px' }}>Portfolio & Design</p>
+      <p style={{ margin: 0, color: '#666', fontSize: '16px' }}>
+        Portfolio & Design
+      </p>
     </header>
   ),
   parameters: {
@@ -138,15 +147,21 @@ export const Responsive: Story = {
   render: () => (
     <div style={{ width: '100%', maxWidth: '400px' }}>
       <div style={{ marginBottom: '20px' }}>
-        <h4 style={{ margin: '0 0 10px 0', fontSize: '14px', color: '#666' }}>Mobile (120px)</h4>
+        <h4 style={{ margin: '0 0 10px 0', fontSize: '14px', color: '#666' }}>
+          Mobile (120px)
+        </h4>
         <Logo width={120} height={25} />
       </div>
       <div style={{ marginBottom: '20px' }}>
-        <h4 style={{ margin: '0 0 10px 0', fontSize: '14px', color: '#666' }}>Tablet (160px)</h4>
+        <h4 style={{ margin: '0 0 10px 0', fontSize: '14px', color: '#666' }}>
+          Tablet (160px)
+        </h4>
         <Logo width={160} height={34} />
       </div>
       <div>
-        <h4 style={{ margin: '0 0 10px 0', fontSize: '14px', color: '#666' }}>Desktop (180px - Default)</h4>
+        <h4 style={{ margin: '0 0 10px 0', fontSize: '14px', color: '#666' }}>
+          Desktop (180px - Default)
+        </h4>
         <Logo />
       </div>
     </div>
@@ -184,7 +199,8 @@ export const CustomStyling: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Logo with custom styling including drop shadow and hover effects.',
+        story:
+          'Logo with custom styling including drop shadow and hover effects.',
       },
     },
   },

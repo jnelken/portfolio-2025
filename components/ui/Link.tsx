@@ -22,7 +22,10 @@ interface LinkOwnProps extends SpacingProps {
   className?: string;
 }
 
-type LinkProps<C extends ElementType = 'a'> = PolymorphicComponentProps<C, LinkOwnProps>;
+type LinkProps<C extends ElementType = 'a'> = PolymorphicComponentProps<
+  C,
+  LinkOwnProps
+>;
 
 export default function Link<C extends ElementType = 'a'>({
   children,
@@ -44,12 +47,20 @@ export default function Link<C extends ElementType = 'a'>({
   };
 
   // Auto-detect external links and set secure defaults
-  const isExternal = external || href.startsWith('http') || href.startsWith('//');
+  const isExternal =
+    external || href.startsWith('http') || href.startsWith('//');
   const linkTarget = target || (isExternal ? '_blank' : undefined);
   const linkRel = rel || (isExternal ? 'noopener noreferrer' : undefined);
 
   return (
-    <UIBase as={as} style={linkStyle} href={href} target={linkTarget} rel={linkRel} {...rest}>
+    <UIBase
+      as={as}
+      style={linkStyle}
+      href={href}
+      target={linkTarget}
+      rel={linkRel}
+      {...rest}
+    >
       {children}
     </UIBase>
   );

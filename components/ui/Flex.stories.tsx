@@ -10,7 +10,14 @@ const meta: Meta<typeof Flex> = {
   argTypes: {
     justify: {
       control: { type: 'select' },
-      options: ['flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly'],
+      options: [
+        'flex-start',
+        'flex-end',
+        'center',
+        'space-between',
+        'space-around',
+        'space-evenly',
+      ],
     },
     align: {
       control: { type: 'select' },
@@ -30,7 +37,9 @@ const meta: Meta<typeof Flex> = {
   },
   decorators: [
     Story => (
-      <div style={{ width: '400px', height: '200px', border: '1px dashed #ccc' }}>
+      <div
+        style={{ width: '400px', height: '200px', border: '1px dashed #ccc' }}
+      >
         <Story />
       </div>
     ),
@@ -41,7 +50,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // Helper component for demo items
-const FlexItem = ({ children, ...props }: { children: React.ReactNode; [key: string]: any }) => (
+const FlexItem = ({
+  children,
+  ...props
+}: {
+  children: React.ReactNode;
+  [key: string]: any;
+}) => (
   <div
     style={{
       padding: '8px 16px',
@@ -183,19 +198,34 @@ export const PolymorphicSection: Story = {
 
 export const Navigation: Story = {
   render: () => (
-    <Flex as="nav" justify="space-between" align="center" padding="md" style={{ backgroundColor: '#f8f9fa' }}>
-      <FlexItem style={{ backgroundColor: '#28a745', color: 'white' }}>Logo</FlexItem>
+    <Flex
+      as="nav"
+      justify="space-between"
+      align="center"
+      padding="md"
+      style={{ backgroundColor: '#f8f9fa' }}
+    >
+      <FlexItem style={{ backgroundColor: '#28a745', color: 'white' }}>
+        Logo
+      </FlexItem>
       <Flex gap={16}>
-        <FlexItem style={{ backgroundColor: 'transparent', border: 'none' }}>Home</FlexItem>
-        <FlexItem style={{ backgroundColor: 'transparent', border: 'none' }}>About</FlexItem>
-        <FlexItem style={{ backgroundColor: 'transparent', border: 'none' }}>Contact</FlexItem>
+        <FlexItem style={{ backgroundColor: 'transparent', border: 'none' }}>
+          Home
+        </FlexItem>
+        <FlexItem style={{ backgroundColor: 'transparent', border: 'none' }}>
+          About
+        </FlexItem>
+        <FlexItem style={{ backgroundColor: 'transparent', border: 'none' }}>
+          Contact
+        </FlexItem>
       </Flex>
     </Flex>
   ),
   parameters: {
     docs: {
       description: {
-        story: 'Common navigation layout using Flex for header with logo and menu items.',
+        story:
+          'Common navigation layout using Flex for header with logo and menu items.',
       },
     },
   },

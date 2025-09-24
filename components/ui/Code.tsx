@@ -10,7 +10,10 @@ interface CodeOwnProps extends SpacingProps {
   className?: string;
 }
 
-type CodeProps<C extends ElementType = 'code'> = PolymorphicComponentProps<C, CodeOwnProps>;
+type CodeProps<C extends ElementType = 'code'> = PolymorphicComponentProps<
+  C,
+  CodeOwnProps
+>;
 
 export default function Code<C extends ElementType = 'code'>({
   children,

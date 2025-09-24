@@ -2,7 +2,13 @@ import { ComponentType, CSSProperties } from 'react';
 
 export type TriggerMode = 'hover' | 'click' | 'manual';
 export type RevealDirection = 'in' | 'out' | 'both';
-export type EasingFunction = 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out' | 'linear' | string;
+export type EasingFunction =
+  | 'ease'
+  | 'ease-in'
+  | 'ease-out'
+  | 'ease-in-out'
+  | 'linear'
+  | string;
 
 export interface RadialRevealProps {
   /** The component that triggers the reveal animation */

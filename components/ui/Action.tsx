@@ -1,4 +1,9 @@
-import { CSSProperties, ReactNode, MouseEventHandler, ElementType } from 'react';
+import {
+  CSSProperties,
+  ReactNode,
+  MouseEventHandler,
+  ElementType,
+} from 'react';
 import { SpacingProps } from '@/lib/ui/spacing';
 import { PolymorphicComponentProps } from '@/lib/ui/polymorphic';
 import {
@@ -21,7 +26,10 @@ interface ActionOwnProps extends SpacingProps {
   className?: string;
 }
 
-type ActionProps<C extends ElementType = 'button'> = PolymorphicComponentProps<C, ActionOwnProps>;
+type ActionProps<C extends ElementType = 'button'> = PolymorphicComponentProps<
+  C,
+  ActionOwnProps
+>;
 
 export default function Action<C extends ElementType = 'button'>({
   children,
@@ -47,7 +55,14 @@ export default function Action<C extends ElementType = 'button'>({
   };
 
   return (
-    <UIBase<'button'> as={as} style={actionStyle} onClick={onClick} disabled={disabled} type={type} {...rest}>
+    <UIBase<'button'>
+      as={as}
+      style={actionStyle}
+      onClick={onClick}
+      disabled={disabled}
+      type={type}
+      {...rest}
+    >
       {children}
     </UIBase>
   );

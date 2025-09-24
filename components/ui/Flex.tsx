@@ -5,7 +5,13 @@ import UIBase from './UIBase';
 
 interface FlexOwnProps extends SpacingProps {
   children: ReactNode;
-  justify?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly';
+  justify?:
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'space-between'
+    | 'space-around'
+    | 'space-evenly';
   align?: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline';
   direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
   gap?: number | string;
@@ -14,7 +20,10 @@ interface FlexOwnProps extends SpacingProps {
   className?: string;
 }
 
-type FlexProps<C extends ElementType = 'div'> = PolymorphicComponentProps<C, FlexOwnProps>;
+type FlexProps<C extends ElementType = 'div'> = PolymorphicComponentProps<
+  C,
+  FlexOwnProps
+>;
 
 export default function Flex<C extends ElementType = 'div'>({
   children,

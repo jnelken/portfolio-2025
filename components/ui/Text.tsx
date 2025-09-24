@@ -22,7 +22,10 @@ interface TextOwnProps extends SpacingProps {
   className?: string;
 }
 
-type TextProps<C extends ElementType = 'p'> = PolymorphicComponentProps<C, TextOwnProps>;
+type TextProps<C extends ElementType = 'p'> = PolymorphicComponentProps<
+  C,
+  TextOwnProps
+>;
 
 export default function Text<C extends ElementType = 'p'>({
   children,

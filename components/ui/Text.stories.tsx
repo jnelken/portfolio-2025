@@ -126,7 +126,8 @@ export const PolymorphicSpan: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Using the `as` prop to render text as a span element instead of the default paragraph.',
+        story:
+          'Using the `as` prop to render text as a span element instead of the default paragraph.',
       },
     },
   },
@@ -140,7 +141,8 @@ export const SemanticHeading: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Heading variants automatically render with the correct semantic HTML element (h1, h2, etc.)',
+        story:
+          'Heading variants automatically render with the correct semantic HTML element (h1, h2, etc.)',
       },
     },
   },

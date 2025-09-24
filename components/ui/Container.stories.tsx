@@ -14,7 +14,13 @@ const meta: Meta<typeof Container> = {
   },
   decorators: [
     Story => (
-      <div style={{ width: '100vw', backgroundColor: '#f5f5f5', minHeight: '200px' }}>
+      <div
+        style={{
+          width: '100vw',
+          backgroundColor: '#f5f5f5',
+          minHeight: '200px',
+        }}
+      >
         <Story />
       </div>
     ),
@@ -26,11 +32,21 @@ type Story = StoryObj<typeof meta>;
 
 // Helper component for demo content
 const DemoContent = () => (
-  <div style={{ backgroundColor: '#e3f2fd', padding: '20px', borderRadius: '8px', border: '1px solid #2196f3' }}>
-    <h3 style={{ margin: '0 0 10px 0', color: '#1976d2' }}>Container Content</h3>
+  <div
+    style={{
+      backgroundColor: '#e3f2fd',
+      padding: '20px',
+      borderRadius: '8px',
+      border: '1px solid #2196f3',
+    }}
+  >
+    <h3 style={{ margin: '0 0 10px 0', color: '#1976d2' }}>
+      Container Content
+    </h3>
     <p style={{ margin: 0, color: '#424242' }}>
-      This content is centered and constrained by the container&apos;s max width. Resize the viewport to see how the
-      container responds to different screen sizes.
+      This content is centered and constrained by the container&apos;s max
+      width. Resize the viewport to see how the container responds to different
+      screen sizes.
     </p>
   </div>
 );
@@ -52,7 +68,8 @@ export const CustomMaxWidth: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Container with custom max-width of 800px instead of the default 1200px.',
+        story:
+          'Container with custom max-width of 800px instead of the default 1200px.',
       },
     },
   },
@@ -97,7 +114,8 @@ export const CustomPadding: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Container with extra large padding (64px) instead of the default medium (16px).',
+        story:
+          'Container with extra large padding (64px) instead of the default medium (16px).',
       },
     },
   },
@@ -121,9 +139,20 @@ export const NoPadding: Story = {
 export const NestedContainers: Story = {
   render: () => (
     <Container>
-      <div style={{ backgroundColor: '#fff3e0', padding: '20px', borderRadius: '8px', marginBottom: '20px' }}>
+      <div
+        style={{
+          backgroundColor: '#fff3e0',
+          padding: '20px',
+          borderRadius: '8px',
+          marginBottom: '20px',
+        }}
+      >
         <h3 style={{ margin: '0 0 15px 0' }}>Outer Container Content</h3>
-        <Container maxWidth="600px" padding="lg" style={{ backgroundColor: '#f3e5f5' }}>
+        <Container
+          maxWidth="600px"
+          padding="lg"
+          style={{ backgroundColor: '#f3e5f5' }}
+        >
           <DemoContent />
         </Container>
       </div>
@@ -147,7 +176,8 @@ export const WithCustomSpacing: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Container with custom vertical margin and padding using the spacing system.',
+        story:
+          'Container with custom vertical margin and padding using the spacing system.',
       },
     },
   },
@@ -162,7 +192,8 @@ export const PolymorphicMain: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Container rendered as a semantic main element for page content.',
+        story:
+          'Container rendered as a semantic main element for page content.',
       },
     },
   },
@@ -179,14 +210,17 @@ export const ArticleContainer: Story = {
           boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
         }}
       >
-        <h1 style={{ margin: '0 0 20px 0', fontSize: '32px', color: '#333' }}>Article Title</h1>
+        <h1 style={{ margin: '0 0 20px 0', fontSize: '32px', color: '#333' }}>
+          Article Title
+        </h1>
         <p style={{ margin: '0 0 15px 0', lineHeight: '1.6', color: '#555' }}>
-          This is an example of using Container as an article element. The container provides optimal reading width and
-          spacing for content.
+          This is an example of using Container as an article element. The
+          container provides optimal reading width and spacing for content.
         </p>
         <p style={{ margin: 0, lineHeight: '1.6', color: '#555' }}>
-          The max-width ensures lines don&apos;t become too long to read comfortably, while the padding provides
-          breathing room around the content.
+          The max-width ensures lines don&apos;t become too long to read
+          comfortably, while the padding provides breathing room around the
+          content.
         </p>
       </div>
     </Container>
@@ -194,7 +228,8 @@ export const ArticleContainer: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Semantic article container with optimal reading width and spacing.',
+        story:
+          'Semantic article container with optimal reading width and spacing.',
       },
     },
   },

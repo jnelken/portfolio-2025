@@ -25,10 +25,14 @@ export default function RadialReveal({
   const fadeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const animationId = useMemo(() => `radial-reveal-${Math.floor(Math.random() * 10000)}`, []);
+  const animationId = useMemo(
+    () => `radial-reveal-${Math.floor(Math.random() * 10000)}`,
+    [],
+  );
 
   // Use external control if provided, otherwise use internal state
-  const isRevealed = trigger === 'manual' ? (externalIsRevealed ?? false) : internalIsRevealed;
+  const isRevealed =
+    trigger === 'manual' ? (externalIsRevealed ?? false) : internalIsRevealed;
 
   // Check for reduced motion preference
   const prefersReducedMotion =
@@ -43,8 +47,14 @@ export default function RadialReveal({
     const triggerRect = triggerRef.current.getBoundingClientRect();
     const containerRect = containerRef.current.getBoundingClientRect();
 
-    const x = ((triggerRect.left + triggerRect.width / 2 - containerRect.left) / containerRect.width) * 100;
-    const y = ((triggerRect.top + triggerRect.height / 2 - containerRect.top) / containerRect.height) * 100;
+    const x =
+      ((triggerRect.left + triggerRect.width / 2 - containerRect.left) /
+        containerRect.width) *
+      100;
+    const y =
+      ((triggerRect.top + triggerRect.height / 2 - containerRect.top) /
+        containerRect.height) *
+      100;
 
     setTriggerPosition({
       x: Math.max(0, Math.min(100, x)),
@@ -226,7 +236,9 @@ export default function RadialReveal({
           ? 1 // Will animate to 0 via transition
           : 0 // Rest state
       : undefined, // Let CSS animations handle it
-    transition: prefersReducedMotion ? `opacity ${duration}ms ${easing}` : undefined,
+    transition: prefersReducedMotion
+      ? `opacity ${duration}ms ${easing}`
+      : undefined,
   };
 
   // Generate ripple elements

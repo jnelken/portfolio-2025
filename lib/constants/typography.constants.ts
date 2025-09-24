@@ -1,14 +1,42 @@
 // Typography design tokens
 export const TYPOGRAPHY_VARIANTS = {
-  h1: { fontSize: '48px', fontWeight: 500, fontFamily: 'var(--font-suisse-intl)' },
-  h2: { fontSize: '36px', fontWeight: 500, fontFamily: 'var(--font-suisse-intl)' },
-  h3: { fontSize: '24px', fontWeight: 500, fontFamily: 'var(--font-suisse-intl)' },
-  h4: { fontSize: '20px', fontWeight: 500, fontFamily: 'var(--font-suisse-intl)' },
-  h5: { fontSize: '18px', fontWeight: 500, fontFamily: 'var(--font-suisse-intl)' },
-  h6: { fontSize: '16px', fontWeight: 500, fontFamily: 'var(--font-suisse-intl)' },
+  h1: {
+    fontSize: '48px',
+    fontWeight: 500,
+    fontFamily: 'var(--font-suisse-intl)',
+  },
+  h2: {
+    fontSize: '36px',
+    fontWeight: 500,
+    fontFamily: 'var(--font-suisse-intl)',
+  },
+  h3: {
+    fontSize: '24px',
+    fontWeight: 500,
+    fontFamily: 'var(--font-suisse-intl)',
+  },
+  h4: {
+    fontSize: '20px',
+    fontWeight: 500,
+    fontFamily: 'var(--font-suisse-intl)',
+  },
+  h5: {
+    fontSize: '18px',
+    fontWeight: 500,
+    fontFamily: 'var(--font-suisse-intl)',
+  },
+  h6: {
+    fontSize: '16px',
+    fontWeight: 500,
+    fontFamily: 'var(--font-suisse-intl)',
+  },
   body: { fontSize: '16px', fontWeight: 400, lineHeight: '1.5' },
   caption: { fontSize: '14px', fontWeight: 400, lineHeight: '1.4' },
-  code: { fontFamily: 'var(--font-geist-mono)', fontSize: '14px', fontWeight: 400 },
+  code: {
+    fontFamily: 'var(--font-geist-mono)',
+    fontSize: '14px',
+    fontWeight: 400,
+  },
 } as const;
 
 export const TYPOGRAPHY_SIZES = {

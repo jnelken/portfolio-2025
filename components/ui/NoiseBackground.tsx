@@ -32,7 +32,10 @@ function generateFromSeed(seed: number) {
   };
 }
 
-export default function NoiseBackground({ style, className }: NoiseBackgroundProps) {
+export default function NoiseBackground({
+  style,
+  className,
+}: NoiseBackgroundProps) {
   const seed = useMemo(() => Math.random() * 1000, []); // Generate once per component mount
   const params = useMemo(() => generateFromSeed(seed), [seed]);
 
