@@ -38,9 +38,6 @@ const containerStyles = {
   bottom: 0,
 };
 
-const CLIP_PATH_A = 60;
-const CLIP_PATH_B = 40;
-
 // Helper function to generate random clip path values
 const generateRandomClipPath = () => {
   const newClipPathA = Math.floor(Math.random() * 100);
@@ -50,33 +47,61 @@ const generateRandomClipPath = () => {
   return { a, b };
 };
 
-// Helper function to create white on black clip path style
-const createWhiteOnBlackStyle = (clipPathA: number, clipPathB: number, backgroundColor: string) => ({
-  position: 'absolute' as const,
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  width: '100%',
-  height: '100%',
-  clipPath: `polygon(0 0, ${clipPathB}% 0, ${clipPathA}% 100%, 0 100%)`,
-  backgroundColor: backgroundColor,
-  zIndex: 2,
-});
+// Helper function to create white on black clip path style using random base + mouse offset
+const createDarkOnLightStyle = (
+  baseA: number,
+  baseB: number,
+  mouseX: number,
+  mouseY: number,
+  backgroundColor: string,
+) => {
+  // Combine random base with mouse offset (mouse provides 0-20% offset)
+  const offsetAmount = 100; // Maximum 20% offset from mouse
+  const mouseOffset = ((mouseX - 50) / 50) * offsetAmount; // -20% to +20% based on mouse position
+  const finalA = Math.max(0, Math.min(100, baseA + mouseOffset));
+  const finalB = Math.max(0, Math.min(100, baseB + mouseOffset));
 
-// Helper function to create black on white clip path style
-const createBlackOnWhiteStyle = (clipPathA: number, clipPathB: number, backgroundColor: string) => ({
-  position: 'absolute' as const,
-  top: 4,
-  left: 4,
-  right: 0,
-  bottom: 0,
-  width: '100%',
-  height: '100%',
-  clipPath: `polygon(${clipPathB}% 0, 100% 0, 100% 100%, ${clipPathA}% 100%)`,
-  filter: 'invert(1)',
-  zIndex: 2,
-});
+  return {
+    position: 'absolute' as const,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
+    clipPath: `polygon(0 0, ${finalB}% 0, ${finalA}% 100%, 0 100%)`,
+    backgroundColor: backgroundColor,
+    zIndex: 2,
+  };
+};
+
+// Helper function to create black on white clip path style using random base + mouse offset
+const createLightOnDarkStyle = (
+  baseA: number,
+  baseB: number,
+  mouseX: number,
+  mouseY: number,
+  backgroundColor: string,
+) => {
+  // Combine random base with mouse offset (mouse provides 0-20% offset)
+  const offsetAmount = 100; // Maximum 20% offset from mouse
+  const mouseOffset = ((mouseX - 50) / 50) * offsetAmount; // -20% to +20% based on mouse position
+  const finalA = Math.max(0, Math.min(100, baseA + mouseOffset));
+  const finalB = Math.max(0, Math.min(100, baseB + mouseOffset));
+
+  return {
+    position: 'absolute' as const,
+    top: 4,
+    left: 4,
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
+    clipPath: `polygon(${finalB}% 0, 100% 0, 100% 100%, ${finalA}% 100%)`,
+    filter: 'invert(1)',
+    zIndex: 2,
+  };
+};
 
 const LandingContent = memo(({ yoe }: { yoe: number }) => (
   <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -109,20 +134,35 @@ const LandingContent = memo(({ yoe }: { yoe: number }) => (
 export default function Landing() {
   const currentYear = new Date().getFullYear();
   const yoe = currentYear - 2016;
-  const [clipPathA, setClipPathA] = useState(CLIP_PATH_A);
-  const [clipPathB, setClipPathB] = useState(CLIP_PATH_B);
+  const [mouseX, setMouseX] = useState(50); // Start at center
+  const [mouseY, setMouseY] = useState(50); // Start at center
+  const [baseA, setBaseA] = useState(60); // Random base values
+  const [baseB, setBaseB] = useState(40); // Random base values
+  const [backgroundColor, setBackgroundColor] = useState(BACKGROUND_COLORS[0]);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setMouseX(Math.max(0, Math.min(100, x))); // Clamp between 0-100
+    setMouseY(Math.max(0, Math.min(100, y))); // Clamp between 0-100
+  }, []);
 
   const handleClick = () => {
+    // Generate new random base values
     const { a, b } = generateRandomClipPath();
-    setClipPathA(a);
-    setClipPathB(b);
-  };
+    setBaseA(a);
+    setBaseB(b);
 
-  const backgroundColor = BACKGROUND_COLORS[Math.floor(Math.random() * BACKGROUND_COLORS.length)];
+    // Also change background color
+    const newColor = BACKGROUND_COLORS[Math.floor(Math.random() * BACKGROUND_COLORS.length)];
+    setBackgroundColor(newColor);
+  };
 
   return (
     <Flex
       onClick={handleClick}
+      onMouseMove={handleMouseMove}
       justify="center"
       align="center"
       style={{
@@ -133,10 +173,10 @@ export default function Landing() {
       }}
     >
       {/* <NoiseBackground /> */}
-      <div style={createWhiteOnBlackStyle(clipPathA, clipPathB, backgroundColor)}>
+      <div style={createDarkOnLightStyle(baseA, baseB, mouseX, mouseY, backgroundColor)}>
         <LandingContent yoe={yoe} />
       </div>
-      <div style={createBlackOnWhiteStyle(clipPathA, clipPathB, backgroundColor)}>
+      <div style={createLightOnDarkStyle(baseA, baseB, mouseX, mouseY, backgroundColor)}>
         <LandingContent yoe={yoe} />
       </div>
     </Flex>
