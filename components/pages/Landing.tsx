@@ -1,12 +1,9 @@
 'use client';
 import Code from '@/components/ui/Code';
-import NoiseBackground from '@/components/ui/NoiseBackground';
-import WarpContainer from '@/components/ui/WarpContainer';
 import Flex from '@/components/ui/Flex';
-import { useState, memo, useCallback, useEffect } from 'react';
-
-const BACKGROUND_COLORS = ['#fbf2eb', '#98D6FF'];
-const EMAIL_ADDRESS = 'talkto@jakenelken.com';
+import { memo } from 'react';
+import { useClipPathEffect } from '@/hooks/useClipPathEffect';
+import { EMAIL_ADDRESS } from '@/lib/constants/info.constants';
 
 const LINK_STYLE = {
   textDecoration: 'underline',
@@ -38,13 +35,18 @@ const containerStyles = {
   bottom: 0,
 };
 
-// Helper function to generate random clip path values
-const generateRandomClipPath = () => {
-  const newClipPathA = Math.floor(Math.random() * 100);
-  const isLeft = Math.random() > 0.5;
-  const a = isLeft ? newClipPathA : 100 - newClipPathA;
-  const b = isLeft ? 100 - newClipPathA : newClipPathA;
-  return { a, b };
+// Helper function to calculate final clip path values with mouse offset
+const calculateClipPathValues = (
+  baseA: number,
+  baseB: number,
+  mouseX: number,
+) => {
+  const offsetAmount = 100; // Maximum 20% offset from mouse
+  const mouseOffset = ((mouseX - 50) / 50) * offsetAmount; // -20% to +20% based on mouse position
+  const finalA = Math.max(0, Math.min(100, baseA + mouseOffset));
+  const finalB = Math.max(0, Math.min(100, baseB + mouseOffset));
+
+  return { finalA, finalB };
 };
 
 // Helper function to create white on black clip path style using random base + mouse offset
@@ -55,11 +57,7 @@ const createDarkOnLightStyle = (
   mouseY: number,
   backgroundColor: string,
 ) => {
-  // Combine random base with mouse offset (mouse provides 0-20% offset)
-  const offsetAmount = 100; // Maximum 20% offset from mouse
-  const mouseOffset = ((mouseX - 50) / 50) * offsetAmount; // -20% to +20% based on mouse position
-  const finalA = Math.max(0, Math.min(100, baseA + mouseOffset));
-  const finalB = Math.max(0, Math.min(100, baseB + mouseOffset));
+  const { finalA, finalB } = calculateClipPathValues(baseA, baseB, mouseX);
 
   return {
     position: 'absolute' as const,
@@ -83,11 +81,7 @@ const createLightOnDarkStyle = (
   mouseY: number,
   backgroundColor: string,
 ) => {
-  // Combine random base with mouse offset (mouse provides 0-20% offset)
-  const offsetAmount = 100; // Maximum 20% offset from mouse
-  const mouseOffset = ((mouseX - 50) / 50) * offsetAmount; // -20% to +20% based on mouse position
-  const finalA = Math.max(0, Math.min(100, baseA + mouseOffset));
-  const finalB = Math.max(0, Math.min(100, baseB + mouseOffset));
+  const { finalA, finalB } = calculateClipPathValues(baseA, baseB, mouseX);
 
   return {
     position: 'absolute' as const,
@@ -104,13 +98,24 @@ const createLightOnDarkStyle = (
 };
 
 const LandingContent = memo(({ yoe }: { yoe: number }) => (
-  <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <div
+    style={{
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    }}
+  >
     <div style={{ maxWidth: '400px', margin: 'auto' }}>
       <p>Hi, I&apos;m Jake.</p>
       <p>
-        I have been building full-stack applications in React for over <Code>{yoe}</Code> years.
+        I have been building full-stack applications in React for over{' '}
+        <Code>{yoe}</Code> years.
       </p>
-      <p>I recently left Datadog and am now looking to start my next chapter.</p>
+      <p>
+        I recently left Datadog and am now looking to start my next chapter.
+      </p>
       <p>
         <a
           href="https://docs.google.com/document/d/1wljBCktOGGqXWqxlf1TtIl36SfncD-2_8RiEWolruf8/edit?tab=t.0"
@@ -134,30 +139,16 @@ const LandingContent = memo(({ yoe }: { yoe: number }) => (
 export default function Landing() {
   const currentYear = new Date().getFullYear();
   const yoe = currentYear - 2016;
-  const [mouseX, setMouseX] = useState(50); // Start at center
-  const [mouseY, setMouseY] = useState(50); // Start at center
-  const [baseA, setBaseA] = useState(60); // Random base values
-  const [baseB, setBaseB] = useState(40); // Random base values
-  const [backgroundColor, setBackgroundColor] = useState(BACKGROUND_COLORS[0]);
 
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    setMouseX(Math.max(0, Math.min(100, x))); // Clamp between 0-100
-    setMouseY(Math.max(0, Math.min(100, y))); // Clamp between 0-100
-  }, []);
-
-  const handleClick = () => {
-    // Generate new random base values
-    const { a, b } = generateRandomClipPath();
-    setBaseA(a);
-    setBaseB(b);
-
-    // Also change background color
-    const newColor = BACKGROUND_COLORS[Math.floor(Math.random() * BACKGROUND_COLORS.length)];
-    setBackgroundColor(newColor);
-  };
+  const {
+    mouseX,
+    mouseY,
+    baseA,
+    baseB,
+    backgroundColor,
+    handleMouseMove,
+    handleClick,
+  } = useClipPathEffect();
 
   return (
     <Flex
@@ -173,10 +164,26 @@ export default function Landing() {
       }}
     >
       {/* <NoiseBackground /> */}
-      <div style={createDarkOnLightStyle(baseA, baseB, mouseX, mouseY, backgroundColor)}>
+      <div
+        style={createDarkOnLightStyle(
+          baseA,
+          baseB,
+          mouseX,
+          mouseY,
+          backgroundColor,
+        )}
+      >
         <LandingContent yoe={yoe} />
       </div>
-      <div style={createLightOnDarkStyle(baseA, baseB, mouseX, mouseY, backgroundColor)}>
+      <div
+        style={createLightOnDarkStyle(
+          baseA,
+          baseB,
+          mouseX,
+          mouseY,
+          backgroundColor,
+        )}
+      >
         <LandingContent yoe={yoe} />
       </div>
     </Flex>
