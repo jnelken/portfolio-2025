@@ -35,68 +35,6 @@ const containerStyles = {
   bottom: 0,
 };
 
-// Helper function to calculate final clip path values with mouse offset
-const calculateClipPathValues = (
-  baseA: number,
-  baseB: number,
-  mouseX: number,
-) => {
-  const offsetAmount = 100; // Maximum 20% offset from mouse
-  const mouseOffset = ((mouseX - 50) / 50) * offsetAmount; // -20% to +20% based on mouse position
-  const finalA = Math.max(0, Math.min(100, baseA + mouseOffset));
-  const finalB = Math.max(0, Math.min(100, baseB + mouseOffset));
-
-  return { finalA, finalB };
-};
-
-// Helper function to create white on black clip path style using random base + mouse offset
-const createDarkOnLightStyle = (
-  baseA: number,
-  baseB: number,
-  mouseX: number,
-  mouseY: number,
-  backgroundColor: string,
-) => {
-  const { finalA, finalB } = calculateClipPathValues(baseA, baseB, mouseX);
-
-  return {
-    position: 'absolute' as const,
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    width: '100%',
-    height: '100%',
-    clipPath: `polygon(0 0, ${finalB}% 0, ${finalA}% 100%, 0 100%)`,
-    backgroundColor: backgroundColor,
-    zIndex: 2,
-  };
-};
-
-// Helper function to create black on white clip path style using random base + mouse offset
-const createLightOnDarkStyle = (
-  baseA: number,
-  baseB: number,
-  mouseX: number,
-  mouseY: number,
-  backgroundColor: string,
-) => {
-  const { finalA, finalB } = calculateClipPathValues(baseA, baseB, mouseX);
-
-  return {
-    position: 'absolute' as const,
-    top: 4,
-    left: 4,
-    right: 0,
-    bottom: 0,
-    width: '100%',
-    height: '100%',
-    clipPath: `polygon(${finalB}% 0, 100% 0, 100% 100%, ${finalA}% 100%)`,
-    filter: 'invert(1)',
-    zIndex: 2,
-  };
-};
-
 const LandingContent = memo(({ yoe }: { yoe: number }) => (
   <div
     style={{
@@ -140,15 +78,8 @@ export default function Landing() {
   const currentYear = new Date().getFullYear();
   const yoe = currentYear - 2016;
 
-  const {
-    mouseX,
-    mouseY,
-    baseA,
-    baseB,
-    backgroundColor,
-    handleMouseMove,
-    handleClick,
-  } = useClipPathEffect();
+  const { darkOnLightStyle, lightOnDarkStyle, handleMouseMove, handleClick } =
+    useClipPathEffect();
 
   return (
     <Flex
@@ -164,26 +95,10 @@ export default function Landing() {
       }}
     >
       {/* <NoiseBackground /> */}
-      <div
-        style={createDarkOnLightStyle(
-          baseA,
-          baseB,
-          mouseX,
-          mouseY,
-          backgroundColor,
-        )}
-      >
+      <div style={darkOnLightStyle}>
         <LandingContent yoe={yoe} />
       </div>
-      <div
-        style={createLightOnDarkStyle(
-          baseA,
-          baseB,
-          mouseX,
-          mouseY,
-          backgroundColor,
-        )}
-      >
+      <div style={lightOnDarkStyle}>
         <LandingContent yoe={yoe} />
       </div>
     </Flex>
