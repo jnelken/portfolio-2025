@@ -3,9 +3,9 @@ import Code from '@/components/ui/Code';
 import NoiseBackground from '@/components/ui/NoiseBackground';
 import WarpContainer from '@/components/ui/WarpContainer';
 import Flex from '@/components/ui/Flex';
-import { useState } from 'react';
+import { useState, memo, useCallback, useEffect } from 'react';
 
-const BACKGROUND_COLOR = '#fbf2eb';
+const BACKGROUND_COLORS = ['#fbf2eb', '#98D6FF'];
 const EMAIL_ADDRESS = 'talkto@jakenelken.com';
 
 const LINK_STYLE = {
@@ -13,7 +13,6 @@ const LINK_STYLE = {
   color: 'var(--foreground)',
 };
 
-// Function to invert a hex color
 const invertHexColor = (hex: string): string => {
   // Remove the # if present
   const cleanHex = hex.replace('#', '');
@@ -52,7 +51,7 @@ const generateRandomClipPath = () => {
 };
 
 // Helper function to create white on black clip path style
-const createWhiteOnBlackStyle = (clipPathA: number, clipPathB: number) => ({
+const createWhiteOnBlackStyle = (clipPathA: number, clipPathB: number, backgroundColor: string) => ({
   position: 'absolute' as const,
   top: 0,
   left: 0,
@@ -61,15 +60,15 @@ const createWhiteOnBlackStyle = (clipPathA: number, clipPathB: number) => ({
   width: '100%',
   height: '100%',
   clipPath: `polygon(0 0, ${clipPathB}% 0, ${clipPathA}% 100%, 0 100%)`,
-  backgroundColor: BACKGROUND_COLOR,
+  backgroundColor: backgroundColor,
   zIndex: 2,
 });
 
 // Helper function to create black on white clip path style
-const createBlackOnWhiteStyle = (clipPathA: number, clipPathB: number) => ({
+const createBlackOnWhiteStyle = (clipPathA: number, clipPathB: number, backgroundColor: string) => ({
   position: 'absolute' as const,
-  top: 0,
-  left: 0,
+  top: 4,
+  left: 4,
   right: 0,
   bottom: 0,
   width: '100%',
@@ -79,7 +78,7 @@ const createBlackOnWhiteStyle = (clipPathA: number, clipPathB: number) => ({
   zIndex: 2,
 });
 
-const LandingContent = ({ yoe }: { yoe: number }) => (
+const LandingContent = memo(({ yoe }: { yoe: number }) => (
   <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
     <div style={{ maxWidth: '400px', margin: 'auto' }}>
       <p>Hi, I&apos;m Jake.</p>
@@ -105,7 +104,7 @@ const LandingContent = ({ yoe }: { yoe: number }) => (
       <p>Thanks for stopping by!</p>
     </div>
   </div>
-);
+));
 
 export default function Landing() {
   const currentYear = new Date().getFullYear();
@@ -119,27 +118,27 @@ export default function Landing() {
     setClipPathB(b);
   };
 
+  const backgroundColor = BACKGROUND_COLORS[Math.floor(Math.random() * BACKGROUND_COLORS.length)];
+
   return (
     <Flex
       onClick={handleClick}
       justify="center"
       align="center"
       style={{
-        backgroundColor: invertHexColor(BACKGROUND_COLOR),
+        backgroundColor: invertHexColor('#ffffff'),
         width: '100%',
         height: '100%',
         ...containerStyles,
       }}
     >
       {/* <NoiseBackground /> */}
-      {/* <WarpContainer intensity={0.2}> */}
-      <div style={createWhiteOnBlackStyle(clipPathA, clipPathB)}>
+      <div style={createWhiteOnBlackStyle(clipPathA, clipPathB, backgroundColor)}>
         <LandingContent yoe={yoe} />
       </div>
-      <div style={createBlackOnWhiteStyle(clipPathA, clipPathB)}>
+      <div style={createBlackOnWhiteStyle(clipPathA, clipPathB, backgroundColor)}>
         <LandingContent yoe={yoe} />
       </div>
-      {/* </WarpContainer> */}
     </Flex>
   );
 }
