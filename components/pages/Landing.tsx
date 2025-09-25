@@ -11,8 +11,6 @@ const LINK_STYLE = {
   color: 'currentColor',
 };
 
-
-
 const containerStyles = {
   position: 'relative' as const,
   top: 0,
@@ -83,10 +81,10 @@ export default function Landing() {
       }}
     >
       {/* <NoiseBackground /> */}
-      <div style={darkOnLightStyle}>
+      <div id="dark-on-light" style={darkOnLightStyle}>
         <LandingContent yoe={yoe} />
       </div>
-      <div style={lightOnDarkStyle}>
+      <div id="light-on-dark" style={lightOnDarkStyle}>
         <LandingContent yoe={yoe} />
       </div>
     </Flex>

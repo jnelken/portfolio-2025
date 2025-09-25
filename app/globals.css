@@ -1,5 +1,5 @@
 :root {
-  --background: #ffffff;
+  --background: #3f3c3a;
   --foreground: #171717;
   --font-suisse-intl-regular:
     'SuisseIntl-Regular', Arial, Helvetica, sans-serif;
@@ -18,9 +18,9 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --filter-invert: invert(1);
+    /* --background: #171717; */
+    /* --foreground: #fbf2eb; */
+    /* --filter-invert: invert(1); */
   }
 }
 
@@ -29,7 +29,7 @@ body {
   padding: 0;
   width: 100vw;
   height: 100vh;
-  /* background: var(--background); */
+  background: var(--background);
   color: var(--foreground);
   font-family: var(--font-suisse-intl-regular);
   font-size: 20px;

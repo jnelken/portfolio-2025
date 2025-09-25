@@ -1,7 +1,9 @@
 import { useState, useCallback, useMemo } from 'react';
 import type { CSSProperties } from 'react';
-
-const BACKGROUND_COLORS = ['#fbf2eb', '#98D6FF'];
+import {
+  CREAM_COLOR,
+  BACKGROUND_COLORS,
+} from '../lib/constants/theme.constants';
 
 export const BASE_CLIP_STYLE = {
   position: 'absolute' as const,
@@ -19,99 +21,75 @@ export const BASE_CLIP_STYLE = {
  * @param points - Array of coordinate pairs [x, y] as percentages
  * @returns CSS polygon clip path string
  * @example
- * // Creates a triangle from top-left to top-right to bottom-left
- * polygon([[0, 0], [100, 0], [0, 100]])
- * // Returns: "polygon(0% 0%, 100% 0%, 0% 100%)"
+ * // Creates a square from top-left to top-right to bottom-right to bottom-left
+ * polygon([[0, 0], [100, 0], [100, 100], [0, 100]])
+ * // Returns: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)"
  */
-export const polygon = (points: [number, number][]): string => {
+const polygon = (points: [number, number][]): string => {
   return `polygon(${points.map(([x, y]) => `${x}% ${y}%`).join(', ')})`;
 };
 
-// Helper function to calculate final clip path values with mouse offset
-export const calculateClipPathValues = (
-  baseA: number,
-  baseB: number,
-  mouseX: number,
-) => {
-  const offsetAmount = 100; // Maximum 100% offset from mouse
-  const mouseOffset = ((mouseX - 50) / 50) * offsetAmount; // -100% to +100% based on mouse position
-  const finalA = Math.max(0, Math.min(100, baseA + mouseOffset));
-  const finalB = Math.max(0, Math.min(100, baseB + mouseOffset));
-
-  return { finalA, finalB };
+// Map mouseX in [0,100] to endpoints on top and bottom so that:
+// - mouseX=0% => topX=0%, bottomX=0%
+// - mouseX=50% => topX≈61.8%, bottomX≈38.2%
+// - mouseX=100% => topX=100%, bottomX=100%
+// Using quadratic fits through these constraints.
+const computeEndpointsFromMouse = (mouseX: number) => {
+  const t = Math.max(0, Math.min(1, mouseX / 100));
+  const top = 100 * (-0.472 * t * t + 1.472 * t);
+  const bottom = 100 * (0.472 * t * t + 0.528 * t);
+  const clamp = (v: number) => Math.max(0, Math.min(100, v));
+  return { topX: clamp(top), bottomX: clamp(bottom) };
 };
 
 // Helper function to create dark on light clip path style using random base + mouse offset
-export const createDarkOnLightStyle = (
-  baseA: number,
-  baseB: number,
+const createDarkOnLightStyle = (
   mouseX: number,
   mouseY: number,
   backgroundColor: string,
 ) => {
-  const { finalA, finalB } = calculateClipPathValues(baseA, baseB, mouseX);
+  const { topX, bottomX } = computeEndpointsFromMouse(mouseX);
 
   return {
     ...BASE_CLIP_STYLE,
     clipPath: polygon([
       [0, 0],
-      [finalB, 0],
-      [finalA, 100],
+      [topX, 0],
+      [bottomX, 100],
       [0, 100],
     ]),
     backgroundColor: backgroundColor,
     // Force readable text on light/cream backgrounds regardless of global theme
-    color: '#111',
+    // color: '#111',
   };
 };
 
 // Helper function to create light on dark clip path style using random base + mouse offset
-export const createLightOnDarkStyle = (
-  baseA: number,
-  baseB: number,
+const createLightOnDarkStyle = (
   mouseX: number,
   mouseY: number,
   backgroundColor: string,
 ) => {
-  const { finalA, finalB } = calculateClipPathValues(baseA, baseB, mouseX);
+  const { topX, bottomX } = computeEndpointsFromMouse(mouseX);
 
   return {
     ...BASE_CLIP_STYLE,
-    top: 4,
-    left: 4,
+    top: 2,
+    left: 2,
     clipPath: polygon([
-      [finalB, 0],
+      [topX, 0],
       [100, 0],
       [100, 100],
-      [finalA, 100],
+      [bottomX, 100],
     ]),
-    // Declare black text so the invert filter yields white on dark regions
-    color: '#000',
+    backgroundColor: CREAM_COLOR,
     filter: 'invert(1)',
   };
 };
 
-interface ClipPathState {
-  mouseX: number;
-  mouseY: number;
-  baseA: number;
-  baseB: number;
-  backgroundColor: string;
-}
-
-interface UseClipPathEffectOptions {
-  initialBackgroundColor: string;
-  backgroundColors: string[];
-}
-
-interface UseClipPathEffectReturn {
-  darkOnLightStyle: CSSProperties;
-  lightOnDarkStyle: CSSProperties;
-  handleMouseMove: (e: React.MouseEvent) => void;
-  handleClick: () => void;
-}
-
-// Helper function to generate random clip path values
+/**
+ * @deprecated Helper function to generate random clip path values
+ */
 const generateRandomClipPath = () => {
   const newClipPathA = Math.floor(Math.random() * 100);
   const isLeft = Math.random() > 0.5;
@@ -120,11 +98,12 @@ const generateRandomClipPath = () => {
   return { a, b };
 };
 
-export const useClipPathEffect = (): UseClipPathEffectReturn => {
+/**
+ * Hook to generate clip path styles based on mouse position and background color
+ */
+export const useClipPathEffect = () => {
   const [mouseX, setMouseX] = useState(50); // Start at center
   const [mouseY, setMouseY] = useState(50); // Start at center
-  const [baseA, setBaseA] = useState(60); // Random base values
-  const [baseB, setBaseB] = useState(40); // Random base values
   const [backgroundColor, setBackgroundColor] = useState(BACKGROUND_COLORS[0]);
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
@@ -136,26 +115,23 @@ export const useClipPathEffect = (): UseClipPathEffectReturn => {
   }, []);
 
   const handleClick = useCallback(() => {
-    // Generate new random base values
-    const { a, b } = generateRandomClipPath();
-    setBaseA(a);
-    setBaseB(b);
-
-    // Also change background color
-    const newColor =
-      BACKGROUND_COLORS[Math.floor(Math.random() * BACKGROUND_COLORS.length)];
-    setBackgroundColor(newColor);
-  }, [BACKGROUND_COLORS]);
+    // Cycle to the next background color in the array
+    setBackgroundColor(prevColor => {
+      const currentIndex = BACKGROUND_COLORS.indexOf(prevColor);
+      const nextIndex = (currentIndex + 1) % BACKGROUND_COLORS.length;
+      return BACKGROUND_COLORS[nextIndex];
+    });
+  }, []);
 
   // Memoize the styles to prevent unnecessary recalculations
   const darkOnLightStyle = useMemo(
-    () => createDarkOnLightStyle(baseA, baseB, mouseX, mouseY, backgroundColor),
-    [baseA, baseB, mouseX, mouseY, backgroundColor],
+    () => createDarkOnLightStyle(mouseX, mouseY, backgroundColor),
+    [mouseX, mouseY, backgroundColor],
   );
 
   const lightOnDarkStyle = useMemo(
-    () => createLightOnDarkStyle(baseA, baseB, mouseX, mouseY, backgroundColor),
-    [baseA, baseB, mouseX, mouseY, backgroundColor],
+    () => createLightOnDarkStyle(mouseX, mouseY, backgroundColor),
+    [mouseX, mouseY, backgroundColor],
   );
 
   return {
