@@ -29,11 +29,16 @@ const LandingContent = memo(({ yoe }: { yoe: number }) => (
       alignItems: 'center',
     }}
   >
-    <div style={{ maxWidth: '400px', margin: 'auto' }}>
+    <div style={{ maxWidth: '500px', margin: 'auto' }}>
       <p>Hi, I&apos;m Jake.</p>
       <p>
         I have been building full-stack applications in React for over{' '}
-        <Code>{yoe}</Code> years.
+        <Code>{yoe}</Code> years, specializing in data visualization, user
+        experience, and enterprise-level frontend applications.
+      </p>
+      <p>
+        My favorite tech stack is <Code>React</Code>, <Code>TypeScript</Code>,{' '}
+        <Code>d3</Code>, and <Code>Next.js</Code>.
       </p>
       <p>
         I recently left Datadog and am now looking to start my next chapter.
@@ -53,7 +58,6 @@ const LandingContent = memo(({ yoe }: { yoe: number }) => (
         </a>
         .
       </p>
-      <p>Thanks for stopping by!</p>
     </div>
   </div>
 ));
