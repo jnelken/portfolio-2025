@@ -7,25 +7,11 @@ import { EMAIL_ADDRESS } from '@/lib/constants/info.constants';
 
 const LINK_STYLE = {
   textDecoration: 'underline',
-  color: 'var(--foreground)',
+  // Inherit from the container so links match section intent
+  color: 'currentColor',
 };
 
-const invertHexColor = (hex: string): string => {
-  // Remove the # if present
-  const cleanHex = hex.replace('#', '');
 
-  // Convert to RGB
-  const r = parseInt(cleanHex.substr(0, 2), 16);
-  const g = parseInt(cleanHex.substr(2, 2), 16);
-  const b = parseInt(cleanHex.substr(4, 2), 16);
-
-  // Invert each component
-  const invertedR = (255 - r).toString(16).padStart(2, '0');
-  const invertedG = (255 - g).toString(16).padStart(2, '0');
-  const invertedB = (255 - b).toString(16).padStart(2, '0');
-
-  return `#${invertedR}${invertedG}${invertedB}`;
-};
 
 const containerStyles = {
   position: 'relative' as const,
@@ -90,7 +76,7 @@ export default function Landing() {
       justify="center"
       align="center"
       style={{
-        backgroundColor: invertHexColor('#ffffff'),
+        backgroundColor: 'var(--background)',
         width: '100%',
         height: '100%',
         ...containerStyles,

@@ -60,6 +60,8 @@ export const createDarkOnLightStyle = (
       [0, 100],
     ]),
     backgroundColor: backgroundColor,
+    // Force readable text on light/cream backgrounds regardless of global theme
+    color: '#111',
   };
 };
 
@@ -83,6 +85,8 @@ export const createLightOnDarkStyle = (
       [100, 100],
       [finalA, 100],
     ]),
+    // Declare black text so the invert filter yields white on dark regions
+    color: '#000',
     filter: 'invert(1)',
   };
 };
