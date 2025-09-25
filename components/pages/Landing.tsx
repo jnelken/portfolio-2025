@@ -74,6 +74,8 @@ const LandingContent = memo(({ yoe }: { yoe: number }) => (
   </div>
 ));
 
+LandingContent.displayName = 'LandingContent';
+
 export default function Landing() {
   const currentYear = new Date().getFullYear();
   const yoe = currentYear - 2016;
